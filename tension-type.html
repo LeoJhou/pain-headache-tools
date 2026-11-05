@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<title>緊縮型頭痛 ICHD-3 診斷</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --ink: #15202c;
+  --muted: #55636f;
+  --line: #cfd7df;
+  --line-strong: #15202c;
+  --blue: #123f75;
+  --on-blue: #ffffff;
+  --blue-soft: #e6eef7;
+  --press: #eef2f6;
+  --bar: #ffffff;
+  --sev-none-bg: #e4e8ec;
+  --sev-none-ink: #15202c;
+  --sev-mod-bg: #a85200;
+  --sev-sev-bg: #a8231c;
+  --sev-ink: #ffffff;
+  --gutter: 16px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12181f;
+    --ink: #e7ecf1;
+    --muted: #9dabb8;
+    --line: #35414d;
+    --line-strong: #e7ecf1;
+    --blue: #93bbea;
+    --on-blue: #0e1620;
+    --blue-soft: #1d2d41;
+    --press: #1e2731;
+    --bar: #171f27;
+    --sev-none-bg: #35414d;
+    --sev-none-ink: #e7ecf1;
+    --sev-mod-bg: #f1b268;
+    --sev-sev-bg: #f49c93;
+    --sev-ink: #10161d;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  -webkit-tap-highlight-color: transparent;
+}
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px var(--gutter) calc(112px + env(safe-area-inset-bottom));
+}
+button, input, textarea { font: inherit; color: inherit; }
+button { touch-action: manipulation; cursor: pointer; background: none; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.en { font-size: 12.5px; color: var(--muted); }
+
+/* 表頭 */
+header { border-bottom: 2px solid var(--line-strong); padding-bottom: 12px; }
+h1 { margin: 0; font-size: 23px; line-height: 1.25; font-weight: 600; letter-spacing: .01em; }
+header .en { display: block; margin-top: 3px; }
+
+.tools { display: grid; grid-template-columns: repeat(4, 1fr); margin: 14px 0 0; }
+.tools button {
+  min-height: 44px; padding: 4px 2px; font-size: 15px;
+  border: 1px solid var(--line); margin-left: -1px;
+}
+.tools button:first-child { margin-left: 0; border-radius: 4px 0 0 4px; }
+.tools button:last-child { border-radius: 0 4px 4px 0; }
+.tools button:active { background: var(--press); }
+.tools button.arm { background: var(--sev-sev-bg); border-color: var(--sev-sev-bg); color: var(--sev-ink); position: relative; font-size: 13px; }
+
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; margin-top: 14px; }
+.fields label { display: block; font-size: 13px; color: var(--muted); min-width: 0; }
+.fields .wide { grid-column: 1 / -1; }
+.fields input {
+  display: block; width: 100%; min-width: 0; min-height: 44px; margin-top: 3px;
+  padding: 8px 10px; font-size: 16px; color: var(--ink);
+  background: transparent; border: 1px solid var(--line); border-radius: 4px;
+  -webkit-appearance: none; appearance: none;
+}
+.note { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+
+.sample {
+  margin: 14px 0 0; padding: 8px 12px; font-size: 14px;
+  border-left: 3px solid var(--blue); background: var(--blue-soft);
+}
+
+/* 區段 */
+section { margin-top: 26px; }
+.sec-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  padding-bottom: 6px; border-bottom: 2px solid var(--line-strong);
+}
+h2 { margin: 0; font-size: 18px; font-weight: 600; }
+.sec-score { font-size: 17px; font-weight: 600; white-space: nowrap; }
+.sec-score small { font-size: 13px; font-weight: 400; color: var(--muted); }
+
+/* 準則小標 */
+.crit { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 14px 0 5px; border-bottom: 1px solid var(--line); }
+.crit h3 { margin: 0; font-size: 15px; font-weight: 600; }
+.crit .st { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.crit .st.ok { color: var(--blue); font-weight: 600; }
+
+/* 勾選列 */
+.checks { list-style: none; margin: 0; padding: 0; }
+.chk {
+  display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 11px; align-items: start;
+  width: 100%; min-height: 48px; padding: 11px 6px 11px 4px; border: 0;
+  border-bottom: 1px solid var(--line); text-align: left; line-height: 1.38;
+}
+.chk:active { background: var(--press); }
+.chk .box {
+  display: flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; margin-top: 1px; border: 1.5px solid var(--muted); border-radius: 3px;
+}
+.chk .box svg { display: none; width: 16px; height: 16px; fill: none; stroke: var(--on-blue); stroke-width: 2.4; }
+.chk.radio .box { border-radius: 50%; }
+.chk.radio .box i { display: none; width: 10px; height: 10px; border-radius: 50%; background: var(--on-blue); }
+.chk[aria-pressed="true"] { background: var(--blue-soft); }
+.chk[aria-pressed="true"] .box { background: var(--blue); border-color: var(--blue); }
+.chk[aria-pressed="true"] .box svg { display: block; }
+.chk.radio[aria-pressed="true"] .box i { display: block; }
+.chk .code { font-weight: 600; margin-right: 3px; }
+.chk .en { margin-left: 5px; }
+.lv { font-size: 12.5px; font-weight: 600; white-space: nowrap; margin-top: 2px; }
+.lv.emergent { color: var(--sev-sev-bg); }
+.lv.urgent, .lv.orange { color: var(--sev-mod-bg); }
+.chk[aria-disabled="true"] { cursor: default; }
+
+/* 整句英文收合 */
+details { border-bottom: 1px solid var(--line); }
+summary { min-height: 48px; padding: 13px 0; cursor: pointer; font-weight: 600; }
+details.full summary { min-height: 44px; padding: 11px 0; font-size: 14px; font-weight: 400; color: var(--muted); }
+details.full ul { list-style: none; margin: 0; padding: 0 0 12px; font-size: 13.5px; }
+details.full li { padding: 3px 0; }
+details.full b { font-weight: 600; margin-right: 3px; }
+
+/* 頁尾 */
+footer { margin-top: 30px; border-top: 2px solid var(--line-strong); }
+footer details div { padding-bottom: 14px; font-size: 14.5px; }
+footer details p { margin: 0 0 8px; }
+.todo { color: var(--muted); }
+
+/* 判讀內容 */
+.res { font-size: 15px; }
+.res h3 { margin: 12px 0 3px; font-size: 13px; font-weight: 400; color: var(--muted); }
+.res h3:first-child { margin-top: 0; }
+.res .big { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.3; }
+.res .sub { margin: 2px 0 0; font-size: 14px; color: var(--muted); }
+.res ul { margin: 0; padding: 0; list-style: none; font-size: 14.5px; }
+.res li { padding: 3px 0; border-bottom: 1px solid var(--line); }
+.res li:last-child { border-bottom: 0; }
+.res .tag { font-weight: 600; margin-right: 4px; white-space: nowrap; }
+.fact { margin: 10px 0 0; padding-left: 10px; border-left: 3px solid var(--line-strong); font-size: 14px; }
+.res .note { margin: 10px 0 8px; }
+
+/* 底部判讀列 */
+.dock {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+  background: var(--bar); border-top: 2px solid var(--line-strong);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.dock-in { max-width: 640px; margin: 0 auto; }
+.panel { padding: 14px var(--gutter) 6px; max-height: 62vh; overflow-y: auto; border-bottom: 1px solid var(--line); }
+.panel[hidden] { display: none; }
+.bar {
+  display: grid; grid-template-columns: repeat(2, auto) minmax(0, 1fr) 20px; align-items: center; gap: 16px;
+  width: 100%; min-height: 66px; padding: 8px var(--gutter); border: 0; text-align: left;
+}
+.bar .cell { min-width: 0; }
+.bar .cell span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.2; }
+.bar .cell b { display: block; font-size: 24px; line-height: 1.15; font-weight: 600; white-space: nowrap; }
+.bar .cell b small { font-size: 13px; font-weight: 400; color: var(--muted); }
+.status { justify-self: end; text-align: right; font-size: 14px; color: var(--muted); line-height: 1.25; }
+.badge { display: inline-block; padding: 5px 10px; border-radius: 3px; font-size: 15px; font-weight: 600; white-space: nowrap; }
+.badge.none { background: var(--sev-none-bg); color: var(--sev-none-ink); }
+.badge.mod { background: var(--sev-mod-bg); color: var(--sev-ink); }
+.badge.sev { background: var(--sev-sev-bg); color: var(--sev-ink); }
+.badge.def { background: var(--blue); color: var(--on-blue); }
+.badge.prob { background: var(--blue-soft); color: var(--blue); box-shadow: inset 0 0 0 1.5px var(--blue); }
+.chev { width: 16px; height: 16px; transition: transform .16s ease; }
+.bar[aria-expanded="true"] .chev { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
+@media (max-width: 350px) {
+  .bar { gap: 11px; padding-left: 12px; padding-right: 12px; }
+  .bar .cell b { font-size: 21px; }
+  .badge { padding: 5px 7px; font-size: 14px; }
+}
+
+.print-only { display: none; }
+
+/* 列印：A4 */
+@media print {
+  :root {
+    color-scheme: light;
+    --bg: #fff; --ink: #000; --muted: #333; --line: #999; --line-strong: #000;
+    --blue: #000; --on-blue: #000; --blue-soft: #fff; --sev-ink: #000;
+    --sev-sev-bg: #000; --sev-mod-bg: #000;
+  }
+  @page { size: A4; margin: 11mm 12mm; }
+  body { font-size: 10.5pt; line-height: 1.28; }
+  main { max-width: none; padding: 0; }
+  .tools, .dock, .note, footer details, details.full { display: none !important; }
+  footer { border: 0; margin: 0; }
+  h1 { font-size: 15pt; }
+  header { padding-bottom: 4px; }
+  .fields { grid-template-columns: 1fr 1fr 2fr; margin-top: 5px; gap: 6px; }
+  .fields .wide { grid-column: auto; }
+  .fields label { font-size: 9pt; color: #000; }
+  .fields input { min-height: 0; margin-top: 0; padding: 1px 0; border: 0; border-bottom: 1px solid #000; border-radius: 0; font-size: 10.5pt; }
+  .fields input::-webkit-calendar-picker-indicator { display: none; }
+  .sample { margin-top: 5px; padding: 2px 8px; border-left: 3px solid #000; font-size: 9.5pt; }
+  .print-only { display: block; }
+  .print-res { margin-top: 6px; padding: 4px 8px; border: 1px solid #000; }
+  .res { font-size: 9.5pt; }
+  .res h3 { margin: 4px 0 1px; font-size: 8.5pt; color: #000; }
+  .res .big { font-size: 11pt; }
+  .res .sub { font-size: 9pt; color: #000; }
+  .res ul { font-size: 9pt; }
+  .res li { padding: 1px 0; border: 0; }
+  .fact { margin-top: 3px; font-size: 8.5pt; }
+  section { margin-top: 7px; break-inside: avoid; }
+  .sec-head { padding-bottom: 1px; border-bottom-width: 1px; }
+  h2 { font-size: 11pt; }
+  .sec-score { font-size: 10pt; }
+  .crit { padding: 3px 0 1px; }
+  .crit h3 { font-size: 9.5pt; }
+  .crit .st { font-size: 8.5pt; color: #000; }
+  .checks { columns: 2; column-gap: 7mm; }
+  .chk { grid-template-columns: 10px minmax(0, 1fr) auto; gap: 4px; min-height: 0; padding: 1.5px 0; font-size: 9pt; line-height: 1.2; color: #555; border-bottom: 0; break-inside: avoid; }
+  .chk .box { width: 9px; height: 9px; margin-top: 1.5px; border: 1px solid #555; }
+  .chk .box svg { width: 8px; height: 8px; stroke-width: 3; }
+  .chk.radio .box i { width: 5px; height: 5px; }
+  .chk .en { display: none; }
+  .chk[aria-pressed="true"] { color: #000; font-weight: 700; }
+  .chk[aria-pressed="true"] .box { background: none; border-color: #000; }
+  .lv { font-size: 8pt; margin-top: 0; }
+  .print-foot { margin-top: 6px; padding-top: 3px; border-top: 1px solid #000; font-size: 8pt; line-height: 1.25; }
+  .print-foot p { margin: 0 0 1px; }
+}
+.tts-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.tts-name { font-size: 15px; line-height: 1.3; }
+.tts-name .en { display: block; }
+.tts-side { display: flex; align-items: center; gap: 6px; }
+.tts-side + .tts-side { margin-top: 4px; }
+.tts-side > span { width: 16px; font-size: 13px; color: var(--muted); }
+.seg { display: grid; grid-template-columns: repeat(4, 46px); }
+.seg button { min-height: 46px; font-size: 16px; border: 1px solid var(--line); margin-left: -1px; }
+.seg button:first-child { margin-left: 0; }
+.seg button:active { background: var(--press); }
+.seg button[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: var(--on-blue); position: relative; font-weight: 600; }
+.tts-def { margin: 8px 0; font-size: 13.5px; color: var(--muted); }
+.tts-tools { padding: 10px 0 0; }
+.tts-tools button { min-height: 44px; padding: 4px 14px; font-size: 15px; border: 1px solid var(--line); border-radius: 4px; }
+.tts-tools button:active { background: var(--press); }
+@media (max-width: 350px) { .tts-row { grid-template-columns: minmax(0, 1fr); gap: 5px; } .seg { grid-template-columns: repeat(4, minmax(0, 1fr)); } .tts-side > span { flex: none; } .tts-side .seg { flex: 1; } }
+@media print {
+  .tts { columns: 2; column-gap: 7mm; }
+  .tts-row { grid-template-columns: minmax(0, 1fr) auto; gap: 3px; padding: 1px 0; border: 0; break-inside: avoid; }
+  .tts-name { font-size: 8.5pt; line-height: 1.1; }
+  .tts-name .en { display: none; }
+  .tts-side + .tts-side { margin-top: 0; }
+  .tts-side > span { width: 9px; font-size: 7.5pt; color: #000; }
+  .seg { grid-template-columns: repeat(4, 11px); }
+  .seg button { min-height: 0; height: 10px; padding: 0; font-size: 7pt; line-height: 1; border: 0; color: #777; }
+  .seg button[aria-pressed="true"] { background: none; color: #000; font-weight: 700; outline: 1px solid #000; }
+  .tts-def { margin: 1px 0; font-size: 8pt; color: #000; }
+  .tts-tools { display: none; }
+}
+.home-link{display:inline-flex;align-items:center;min-height:44px;margin:-12px 0 0;color:var(--blue);font-size:15px;text-decoration:none}@media print{.home-link{display:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <a class="home-link" href="index.html">‹ 首頁</a>
+    <h1>緊縮型頭痛 ICHD-3 診斷</h1>
+    <span class="en" lang="en">ICHD-3 2. Tension-type headache, Total Tenderness Score</span>
+    <div class="tools">
+      <button type="button" id="btnSample">範例</button>
+      <button type="button" id="btnReset">重設</button>
+      <button type="button" id="btnPrint">列印</button>
+      <button type="button" id="btnCsv">匯出 CSV</button>
+    </div>
+    <div class="fields">
+      <label>病歷號<input id="mrn" autocomplete="off" inputmode="text"></label>
+      <label>日期<input id="date" type="date"></label>
+      <label class="wide">備註<input id="memo" autocomplete="off"></label>
+    </div>
+    <p class="note">不儲存。關閉或重新整理就清空。</p>
+    <p class="sample" id="sampleFlag" hidden></p>
+    <div class="print-only print-res"><div class="res" id="printResult"></div></div>
+  </header>
+
+  <section aria-labelledby="h-dx">
+    <div class="sec-head">
+      <h2 id="h-dx">診斷準則</h2>
+      <span class="sec-score" id="sDx"></span>
+    </div>
+    <div class="crit"><h3>A 頻率，選一項</h3><span class="st" id="stA"></span></div>
+    <ul class="checks" id="lA"></ul>
+    <div class="crit"><h3>B 單次持續時間，選一項</h3><span class="st" id="stB"></span></div>
+    <ul class="checks" id="lB"></ul>
+    <div class="crit"><h3>C 頭痛特徵，至少 2 項</h3><span class="st" id="stC"></span></div>
+    <ul class="checks" id="lC"></ul>
+    <div class="crit"><h3>D 勾出現的症狀，沒勾視為沒有</h3><span class="st" id="stD"></span></div>
+    <ul class="checks" id="lD"></ul>
+    <div class="crit"><h3>E 排除，兩項都要</h3><span class="st" id="stE"></span></div>
+    <ul class="checks" id="lE"></ul>
+    <div id="fDx"></div>
+  </section>
+
+  <section aria-labelledby="h-tts">
+    <div class="sec-head">
+      <h2 id="h-tts">顱周壓痛 <span class="en" lang="en">Total Tenderness Score</span></h2>
+      <span class="sec-score" id="sTts"></span>
+    </div>
+    <ul class="checks" id="lM"></ul>
+    <p class="tts-def">0 無痛或無反應。1 輕度壓痛，無表情變化。2 中度壓痛，皺眉或有表情反應。3 劇烈壓痛，有退縮反應。</p>
+    <div class="tts" id="tts"></div>
+    <div class="tts-tools"><button type="button" id="ttsClear">全部歸零</button></div>
+  </section>
+
+  <footer>
+    <details>
+      <summary>判定方式</summary>
+      <div>
+        <p>A：選定且不是 A0。B：陣發型只接受 30 分–7 天，慢性型另接受數小時至數天或不緩解。C：至少 2 項。</p>
+        <p>D 陣發型：沒有中重度噁心或嘔吐，沒有輕微噁心，畏光怕吵最多 1 項。D 慢性型：沒有中重度噁心或嘔吐，畏光、怕吵、輕微噁心最多 1 項。</p>
+        <p>E 成立且 A–D 全符合：判 2.1、2.2 或 2.3。E 成立且 A–D 缺一：A0 或偶發型判 2.4.1，頻繁型 2.4.2，慢性型 2.4.3。</p>
+        <p>第 4 碼：手法觸診有增加或 TTS 大於 0 為 .1，否則為 .2。TTS 為 7 肌左右各 0–3 分，最高 42。</p>
+      </div>
+    </details>
+    <details>
+      <summary>ICHD-3 附註</summary>
+      <div>
+        <p>可與陣發性偏頭痛並列編碼。2.x 與 1.5 都符合時編 2.x。2.3 與 1.3 都符合時只編 1.3。每天不緩解且 24 小時內開始編 4.10。</p>
+      </div>
+    </details>
+    <details>
+      <summary>出處與查證</summary>
+      <div>
+        <p>Headache Classification Committee of the International Headache Society. ICHD-3. Cephalalgia. 2018;38(1):1–211。線上版 ichd-3.org。</p>
+        <p>2026-11-04 查證：已讀 ichd-3.org 2.1–2.4 原文，A–D 與老師工具相同。TTS 的 7 條肌肉、0–3 分與可加總也與原文相同。</p>
+        <p class="todo">TTS 大於 0 即 .1 是老師版，ICHD-3 沒有切點。最高 42 是推算（7×2×3）。0–3 的文字定義是老師版。</p>
+        <p class="todo">肌肉名稱內的冠狀突、乳突、枕下肌群是老師加的。</p>
+        <p class="todo">E 老師拆兩項（排除、未符合 1.1）；原文只有一句排除，階層上偏頭痛優先。</p>
+        <p class="todo">偏頭痛特徵提醒取自老師工具。中文譯名未對官方中文版。</p>
+      </div>
+    </details>
+    <div class="print-only print-foot">
+      <p>Headache Classification Committee of the IHS. ICHD-3. Cephalalgia. 2018;38(1):1–211。TTS 大於 0 即 .1、0–3 文字定義、E 拆兩項取自洪志憲老師工具。</p>
+    </div>
+  </footer>
+</main>
+
+<div class="dock">
+  <div class="dock-in">
+    <div class="panel" id="panel" hidden><div class="res" id="result"></div></div>
+    <button type="button" class="bar" id="bar" aria-expanded="false" aria-controls="panel">
+      <span class="cell"><span>A–D</span><b id="bAD"></b></span>
+      <span class="cell"><span>TTS</span><b id="bTts"></b></span>
+      <span class="status" id="status" aria-live="polite"></span>
+      <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 10l5-5 5 5"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const CHECK = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8"/></svg>';
+const state = { on: {}, pick: {}, sample: false };
+let page = null;
+let sampleIdx = 0;
+
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+function rowHtml(it) {
+  const code = it.code ? `<span class="code">${it.code}</span>` : '';
+  const en = it.en ? `<span class="en" lang="en">${it.en}</span>` : '';
+  const lv = it.lvText ? `<span class="lv ${it.lv}">${it.lvText}</span>` : '';
+  return `<span class="box">${CHECK}<i></i></span><span>${code}${it.zh}${en}</span>${lv}`;
+}
+function renderList(hostId, items, group) {
+  const host = $(hostId);
+  items.forEach(it => {
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = group ? 'chk radio' : 'chk';
+    b.innerHTML = rowHtml(it);
+    if (group) {
+      b.dataset.group = group; b.dataset.val = it.id;
+      b.addEventListener('click', () => { state.pick[group] = state.pick[group] === it.id ? null : it.id; touched(); });
+    } else {
+      b.dataset.id = it.id;
+      b.addEventListener('click', () => { state.on[it.id] = !state.on[it.id]; touched(); });
+    }
+    li.appendChild(b);
+    host.appendChild(li);
+  });
+}
+/* 整句英文：預設收合 */
+function renderFull(hostId, items) {
+  const d = document.createElement('details');
+  d.className = 'full';
+  d.innerHTML = '<summary>看英文原文</summary><ul lang="en">' +
+    items.filter(i => i.full).map(i => `<li>${i.code ? `<b>${i.code}</b>` : ''}${i.full}</li>`).join('') + '</ul>';
+  $(hostId).appendChild(d);
+}
+function setCrit(id, ok, text) {
+  const el = $(id);
+  el.textContent = text;
+  el.classList.toggle('ok', !!ok);
+}
+function setResult(html) {
+  $('result').innerHTML = html;
+  $('printResult').innerHTML = html;
+}
+function today() {
+  const d = new Date();
+  const p = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+function sync() {
+  document.querySelectorAll('[data-id]').forEach(b => b.setAttribute('aria-pressed', !!state.on[b.dataset.id]));
+  document.querySelectorAll('[data-group]').forEach(b => b.setAttribute('aria-pressed', state.pick[b.dataset.group] === b.dataset.val));
+  $('sampleFlag').hidden = !state.sample;
+  page.render();
+}
+function touched() { state.sample = false; sync(); }
+function clearAnswers() {
+  state.on = {}; state.pick = {}; state.sample = false;
+  if (page.clearExtra) page.clearExtra();
+}
+
+/* 重設要按兩次，避免單手誤觸 */
+let armTimer = null;
+function disarm() {
+  clearTimeout(armTimer);
+  $('btnReset').classList.remove('arm');
+  $('btnReset').textContent = '重設';
+}
+function hasData() {
+  return Object.values(state.on).some(Boolean) || Object.values(state.pick).some(Boolean) ||
+    (page.hasExtra && page.hasExtra()) || $('mrn').value || $('memo').value;
+}
+function csvCell(v) {
+  let t = v === null || v === undefined ? '' : String(v);
+  if (typeof v === 'string' && /^[=+\-@\t\r]/.test(t)) t = "'" + t;
+  return /[",\n\r]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t;
+}
+function buildCsv() {
+  const rows = [
+    ['項目', '英文', '值'],
+    ['量表', page.name, ''],
+    ['範例資料', '', state.sample ? '是' : '否'],
+    ['病歷號', '', $('mrn').value],
+    ['日期', '', $('date').value],
+    ['備註', '', $('memo').value]
+  ].concat(page.csv());
+  return '﻿' + rows.map(r => r.map(csvCell).join(',')).join('\r\n');
+}
+function initCommon(p) {
+  page = p;
+  $('btnSample').addEventListener('click', () => {
+    clearAnswers();
+    const s = p.samples[sampleIdx];
+    s.set();
+    state.sample = true;
+    $('sampleFlag').textContent = `範例 ${sampleIdx + 1}／${p.samples.length}：${s.label}。範例資料，不是真實病人。`;
+    sampleIdx = (sampleIdx + 1) % p.samples.length;
+    disarm();
+    sync();
+  });
+  $('btnReset').addEventListener('click', () => {
+    const r = $('btnReset');
+    if (hasData() && !r.classList.contains('arm')) {
+      r.classList.add('arm');
+      r.textContent = '再按清空';
+      armTimer = setTimeout(disarm, 3000);
+      return;
+    }
+    disarm();
+    clearAnswers();
+    sampleIdx = 0;
+    $('mrn').value = ''; $('memo').value = ''; $('date').value = today();
+    sync();
+  });
+  $('btnPrint').addEventListener('click', () => window.print());
+  $('btnCsv').addEventListener('click', () => {
+    const url = URL.createObjectURL(new Blob([buildCsv()], { type: 'text/csv;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${p.name}_${$('date').value || today()}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+  $('bar').addEventListener('click', () => {
+    const open = $('bar').getAttribute('aria-expanded') === 'true';
+    $('bar').setAttribute('aria-expanded', !open);
+    $('panel').hidden = open;
+  });
+  $('date').value = today();
+  sync();
+}
+
+const A = [
+  { id: 'freq_infreq', code: 'A1', zh: '偶發（2.1）：≥10 次，平均每月 <1 天（每年 <12 天）', full: 'At least 10 episodes occurring on <1 day/month on average (<12 days/year)' },
+  { id: 'freq_freq', code: 'A2', zh: '頻繁（2.2）：≥10 次，平均每月 1–14 天，>3 個月（每年 ≥12 且 <180 天）', full: 'At least 10 episodes occurring on 1–14 days/month on average for >3 months (≥12 and <180 days/year)' },
+  { id: 'freq_chronic', code: 'A3', zh: '慢性（2.3）：平均每月 ≥15 天，>3 個月（每年 ≥180 天）', full: 'Headache occurring on ≥15 days/month on average for >3 months (≥180 days/year)' },
+  { id: 'freq_unmet', code: 'A0', zh: '未滿 10 次，或慢性未滿 3 個月', full: 'Fewer than 10 lifetime episodes, or duration <3 months' }
+];
+const B = [
+  { id: 'dur_ep', code: 'B1', zh: '30 分鐘至 7 天', full: 'Lasting from 30 minutes to 7 days' },
+  { id: 'dur_chr', code: 'B2', zh: '數小時至數天，或不緩解（2.3）', full: 'Lasting hours to days, or unremitting' },
+  { id: 'dur_short', code: 'B0', zh: '短於 30 分鐘', full: 'Duration <30 minutes' }
+];
+const C = [
+  { id: 'c_bilat', code: 'C1', zh: '雙側', en: 'Bilateral', full: 'Bilateral location' },
+  { id: 'c_press', code: 'C2', zh: '壓迫或緊箍感，非搏動', en: 'Pressing or tightening', full: 'Pressing or tightening (non-pulsating) quality' },
+  { id: 'c_mildmod', code: 'C3', zh: '輕度或中度', en: 'Mild or moderate', full: 'Mild or moderate intensity' },
+  { id: 'c_noaggr', code: 'C4', zh: '走路、爬樓梯不加劇', full: 'Not aggravated by routine physical activity such as walking or climbing stairs' }
+];
+const D = [
+  { id: 'd_photo', code: 'D', zh: '畏光', en: 'Photophobia', full: 'Photophobia' },
+  { id: 'd_phono', code: 'D', zh: '怕吵', en: 'Phonophobia', full: 'Phonophobia' },
+  { id: 'd_mild_nausea', code: 'D', zh: '輕微噁心（僅慢性型允許）', en: 'Mild nausea', full: 'Mild nausea' },
+  { id: 'd_modsev_nausea', code: 'D', zh: '中重度噁心或嘔吐（各型都排除）', en: 'Moderate or severe nausea, or vomiting', full: 'Moderate or severe nausea, or vomiting' }
+];
+const E = [
+  { id: 'e_clear', code: 'E1', zh: '無法以其他 ICHD-3 診斷更好解釋（已排除次發性頭痛）', full: 'Not better accounted for by another ICHD-3 diagnosis' },
+  { id: 'e_not_mig', code: 'E2', zh: '未符合 1.1 無預兆偏頭痛準則' }
+];
+const M = [{ id: 'manual', zh: '手法觸診有顱周壓痛增加', en: 'Increased pericranial tenderness on manual palpation' }];
+const MUSCLES = [
+  ['frontalis', '額肌', 'Frontalis'], ['temporalis', '顳肌', 'Temporalis'], ['masseter', '嚼肌', 'Masseter'],
+  ['pterygoid', '翼狀肌／冠狀突', 'Lateral pterygoid / Coronoid process'],
+  ['scm', '胸鎖乳突肌與乳突附著處', 'SCM & Mastoid'],
+  ['splenius', '頭夾肌／枕下肌群', 'Splenius / Suboccipital'], ['trapezius', '斜方肌', 'Trapezius']
+];
+renderList('lA', A, 'freq');
+renderList('lB', B, 'dur');
+renderList('lC', C);
+renderList('lD', D);
+renderList('lE', E);
+renderList('lM', M);
+renderFull('fDx', [...A, ...B, ...C, ...D, ...E]);
+
+let tts = {};
+const zero = () => { tts = {}; MUSCLES.forEach(m => tts[m[0]] = { L: 0, R: 0 }); };
+zero();
+$('tts').innerHTML = MUSCLES.map((m, i) => {
+  const side = (s, t) => `<div class="tts-side"><span>${t}</span><div class="seg" role="group" aria-label="${m[1]} ${t}側">${[0, 1, 2, 3].map(v => `<button type="button" data-m="${m[0]}" data-s="${s}" data-v="${v}">${v}</button>`).join('')}</div></div>`;
+  return `<div class="tts-row"><div class="tts-name">${i + 1}. ${m[1]}<span class="en" lang="en">${m[2]}</span></div><div>${side('L', '左')}${side('R', '右')}</div></div>`;
+}).join('');
+$('tts').addEventListener('click', e => {
+  const b = e.target.closest('button[data-m]');
+  if (!b) return;
+  tts[b.dataset.m][b.dataset.s] = Number(b.dataset.v);
+  touched();
+});
+$('ttsClear').addEventListener('click', () => { zero(); touched(); });
+const total = () => MUSCLES.reduce((a, m) => a + tts[m[0]].L + tts[m[0]].R, 0);
+document.querySelector('[data-id="manual"]').addEventListener('click', e => { if (total() > 0) e.stopImmediatePropagation(); }, true);
+
+const on = id => !!state.on[id];
+const NAME = {
+  freq_infreq: ['2.1', '偶發陣發性緊縮型頭痛'], freq_freq: ['2.2', '頻繁陣發性緊縮型頭痛'], freq_chronic: ['2.3', '慢性緊縮型頭痛']
+};
+function evaluate() {
+  const freq = state.pick.freq, dur = state.pick.dur;
+  const chronic = freq === 'freq_chronic';
+  const cA = !!freq && freq !== 'freq_unmet';
+  const cB = chronic ? (dur === 'dur_ep' || dur === 'dur_chr') : dur === 'dur_ep';
+  const cN = C.filter(x => on(x.id)).length, cC = cN >= 2;
+  const photoPhono = (on('d_photo') ? 1 : 0) + (on('d_phono') ? 1 : 0);
+  const cD = chronic
+    ? !on('d_modsev_nausea') && photoPhono + (on('d_mild_nausea') ? 1 : 0) <= 1
+    : !on('d_modsev_nausea') && !on('d_mild_nausea') && photoPhono <= 1;
+  const cE = on('e_clear') && on('e_not_mig');
+  const anyABC = !!freq || !!dur || cN > 0;
+  const n = [cA, cB, cC, cD].filter(Boolean).length;
+  const t = total();
+  const tender = on('manual') || t > 0;
+  let code = null, name = '', probable = false;
+  if (cE && n === 4 && NAME[freq]) {
+    code = `${NAME[freq][0]}.${tender ? 1 : 2}`;
+    name = `${NAME[freq][1]}，${tender ? '伴' : '不伴'}顱周壓痛`;
+  } else if (cE && n === 3 && freq) {
+    probable = true;
+    if (freq === 'freq_chronic') { code = '2.4.3'; name = '可能慢性緊縮型頭痛'; }
+    else if (freq === 'freq_freq') { code = '2.4.2'; name = '可能頻繁陣發性緊縮型頭痛'; }
+    else { code = '2.4.1'; name = '可能偶發陣發性緊縮型頭痛'; }
+  }
+  return { freq, dur, chronic, cA, cB, cN, cC, cD, cE, anyABC, n, t, tender, code, name, probable };
+}
+function migFeatures(r) {
+  if (r.cN === 0 && !D.some(x => on(x.id))) return [];
+  const f = [];
+  if (!on('c_bilat')) f.push('非雙側');
+  if (!on('c_press')) f.push('非壓迫緊箍');
+  if (!on('c_mildmod')) f.push('非輕中度');
+  if (!on('c_noaggr')) f.push('活動會加劇');
+  if (on('d_modsev_nausea')) f.push('中重度噁心或嘔吐');
+  if (on('d_photo') && on('d_phono')) f.push('畏光且怕吵');
+  return f;
+}
+const mark = b => b ? '符合' : '未符合';
+initCommon({
+  name: '緊縮型頭痛ICHD3',
+  samples: [
+    { label: '2.1.2 偶發型，無壓痛', set() { state.pick.freq = 'freq_infreq'; state.pick.dur = 'dur_ep'; ['c_bilat', 'c_press', 'c_mildmod', 'c_noaggr', 'e_clear', 'e_not_mig'].forEach(k => state.on[k] = true); } },
+    { label: '2.2.1 頻繁型，有壓痛', set() { state.pick.freq = 'freq_freq'; state.pick.dur = 'dur_ep'; ['c_bilat', 'c_press', 'c_mildmod', 'c_noaggr', 'e_clear', 'e_not_mig', 'manual'].forEach(k => state.on[k] = true); tts.temporalis = { L: 2, R: 2 }; tts.trapezius = { L: 2, R: 2 }; } },
+    { label: '2.3.1 慢性型，輕微噁心', set() { state.pick.freq = 'freq_chronic'; state.pick.dur = 'dur_chr'; ['c_bilat', 'c_press', 'c_mildmod', 'c_noaggr', 'd_mild_nausea', 'e_clear', 'e_not_mig', 'manual'].forEach(k => state.on[k] = true); tts.frontalis = { L: 1, R: 1 }; tts.splenius = { L: 2, R: 2 }; tts.trapezius = { L: 3, R: 3 }; } }
+  ],
+  clearExtra() { zero(); },
+  hasExtra() { return total() > 0; },
+  render() {
+    const r = evaluate();
+    const shown = r.anyABC ? r.n : 0;
+    document.querySelectorAll('#tts button').forEach(b => b.setAttribute('aria-pressed', tts[b.dataset.m][b.dataset.s] === Number(b.dataset.v)));
+    const mb = document.querySelector('[data-id="manual"]');
+    if (r.t > 0) { mb.setAttribute('aria-pressed', 'true'); mb.setAttribute('aria-disabled', 'true'); }
+    else mb.removeAttribute('aria-disabled');
+    $('sDx').innerHTML = `${shown}<small>／4</small>`;
+    $('bAD').innerHTML = `${shown}<small>／4</small>`;
+    $('sTts').innerHTML = `${r.t}<small>／42</small>`;
+    $('bTts').innerHTML = `${r.t}<small>／42</small>`;
+    setCrit('stA', r.cA, mark(r.cA));
+    setCrit('stB', r.cB, mark(r.cB));
+    setCrit('stC', r.cC, `${r.cN}/4 ${mark(r.cC)}`);
+    setCrit('stD', r.anyABC && r.cD, r.anyABC ? mark(r.cD) : '—');
+    setCrit('stE', r.cE, mark(r.cE));
+    $('status').innerHTML = r.code
+      ? `<span class="badge ${r.probable ? 'prob' : 'def'}">${r.code}</span>`
+      : '<span class="badge none">未符合</span>';
+    const f = [];
+    if (r.code && !r.probable) {
+      f.push(r.t > 0 ? `TTS ${r.t}/42，第 4 碼 .1。ICHD-3 沒有切點，TTS 大於 0 即 .1 是老師版。` : on('manual') ? '手法觸診有增加，第 4 碼 .1。' : '未勾觸診且 TTS 為 0，第 4 碼顯示 .2；沒做觸診時第 4 碼不成立。');
+    }
+    if (!r.cE && r.n >= 3) f.push('E 未勾滿：不判 2.x 或 2.4。');
+    if (!r.chronic && on('d_mild_nausea')) f.push('輕微噁心僅慢性型允許。');
+    if (r.anyABC && !D.some(x => on(x.id)) && r.cD) f.push('D 沒勾視為沒有這些症狀，要問過才算數。');
+    const mig = migFeatures(r);
+    if (mig.length >= 2) f.push(`具 ≥2 個偏頭痛特徵：${mig.join('、')}。核對 1.1／1.5.1。C 未勾的項目視為有該特徵。`);
+    setResult(
+      `<h3>判定</h3><p class="big">${r.code ? `${r.code} ${r.name}` : '未符合 2.x 或 2.4'}</p>` +
+      f.map(t => `<p class="fact">${t}</p>`).join('') +
+      `<h3>準則</h3><p class="sub">A ${mark(r.cA)}、B ${mark(r.cB)}、C ${r.cN}/4、D ${r.anyABC ? mark(r.cD) : '—'}、E ${mark(r.cE)}</p>` +
+      `<h3>顱周壓痛</h3><p class="sub">TTS ${r.t}/42，${r.tender ? '有' : '未見'}壓痛增加</p>`
+    );
+  },
+  csv() {
+    const r = evaluate();
+    const rows = [
+      ['判定', 'Diagnosis', r.code || '未符合'],
+      ['A–D 符合數', 'Criteria met', r.anyABC ? r.n : 0],
+      ['頻率', 'Frequency', r.freq ? A.find(x => x.id === r.freq).code : ''],
+      ['持續時間', 'Duration', r.dur ? B.find(x => x.id === r.dur).code : ''],
+      ['TTS 總分', 'Total Tenderness Score', r.t],
+      ['顱周壓痛增加', 'Pericranial tenderness', r.tender ? 1 : 0]
+    ];
+    [...C, ...D, ...E].forEach(x => rows.push([`${x.code} ${x.zh}`, x.en || x.full || '', on(x.id) ? 1 : 0]));
+    MUSCLES.forEach(m => { rows.push([`${m[1]} 左`, m[2], tts[m[0]].L]); rows.push([`${m[1]} 右`, m[2], tts[m[0]].R]); });
+    return rows;
+  }
+});
+
+</script>
+</body>
+</html>

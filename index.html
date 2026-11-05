@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<title>疼痛與頭痛工具</title>
+<style>
+:root { color-scheme: light dark; --bg: #fff; --ink: #15202c; --muted: #55636f; --line: #cfd7df; --line-strong: #15202c; --blue: #123f75; --press: #eef2f6; --gutter: 16px; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #12181f; --ink: #e7ecf1; --muted: #9dabb8; --line: #35414d; --line-strong: #e7ecf1; --blue: #93bbea; --press: #1e2731; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif; font-size: 16px; line-height: 1.45; -webkit-tap-highlight-color: transparent; }
+main { max-width: 640px; margin: 0 auto; padding: 20px var(--gutter) calc(32px + env(safe-area-inset-bottom)); }
+header { border-bottom: 2px solid var(--line-strong); padding-bottom: 12px; }
+h1 { margin: 0; font-size: 23px; line-height: 1.25; font-weight: 600; letter-spacing: .01em; }
+.src { margin: 4px 0 0; font-size: 13.5px; color: var(--muted); }
+h2 { margin: 24px 0 0; padding-bottom: 6px; border-bottom: 1px solid var(--line-strong); font-size: 16px; font-weight: 600; color: var(--blue); }
+ul { list-style: none; margin: 0; padding: 0; }
+li { border-bottom: 1px solid var(--line); }
+a { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 0; color: inherit; text-decoration: none; }
+a:active { background: var(--press); }
+a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.t { flex: 1; min-width: 0; }
+.n { font-weight: 600; }
+.en { font-size: 12.5px; color: var(--muted); font-weight: 400; }
+.d { display: block; margin-top: 1px; font-size: 14px; color: var(--muted); }
+.lock { flex: none; font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>疼痛與頭痛工具</h1>
+    <p class="src">重製自洪志憲老師疼痛課量表。輸入內容不儲存。</p>
+  </header>
+  <h2>強度</h2>
+  <ul>
+    <li><a href="intensity.html"><span class="t"><span class="n">疼痛強度量表</span> <span class="en" lang="en">NRS, VRS, VAS</span><span class="d">記錄當下疼痛強度與治療反應</span></span></a></li>
+    <li><a href="faces.html"><span class="t"><span class="n">臉譜疼痛量表</span> <span class="en" lang="en">Faces</span><span class="d">看六張臉選疼痛強度</span></span><span class="lock">需密碼</span></a></li>
+  </ul>
+  <h2>疼痛量表</h2>
+  <ul>
+    <li><a href="sf-mpq.html"><span class="t"><span class="n">簡短麥吉爾疼痛問卷</span> <span class="en" lang="en">SF-MPQ</span><span class="d">描述疼痛的感覺與情感面</span></span><span class="lock">需密碼</span></a></li>
+    <li><a href="bpi-sf.html"><span class="t"><span class="n">簡明疼痛量表</span> <span class="en" lang="en">BPI-SF</span><span class="d">疼痛強度與對生活的干擾，含人體圖</span></span><span class="lock">需密碼</span></a></li>
+    <li><a href="paindetect.html"><span class="t"><span class="n">PainDETECT</span><span class="d">篩檢神經病理性疼痛</span></span><span class="lock">需密碼</span></a></li>
+    <li><a href="whympi.html"><span class="t"><span class="n">西黑文-耶魯多維度疼痛量表</span> <span class="en" lang="en">WHYMPI</span><span class="d">慢性疼痛的多維度評估與分型</span></span><span class="lock">需密碼</span></a></li>
+    <li><a href="wpi-sss.html"><span class="t"><span class="n">纖維肌痛症</span> <span class="en" lang="en">WPI, SSS</span><span class="d">依疼痛範圍與症狀嚴重度判定</span></span><span class="lock">需密碼</span></a></li>
+  </ul>
+  <h2>頭痛</h2>
+  <ul>
+    <li><a href="snnoop10.html"><span class="t"><span class="n">次發性頭痛警訊</span> <span class="en" lang="en">SNNOOP10</span><span class="d">逐項排查次發性頭痛的紅旗</span></span><span class="lock">需密碼</span></a></li>
+    <li><a href="migraine.html"><span class="t"><span class="n">偏頭痛</span> <span class="en" lang="en">ICHD-3</span><span class="d">逐項對照診斷條件</span></span></a></li>
+    <li><a href="tension-type.html"><span class="t"><span class="n">緊縮型頭痛</span> <span class="en" lang="en">ICHD-3</span><span class="d">逐項對照診斷條件</span></span></a></li>
+    <li><a href="cluster.html"><span class="t"><span class="n">叢發性頭痛</span> <span class="en" lang="en">ICHD-3</span><span class="d">逐項對照診斷條件</span></span></a></li>
+  </ul>
+</main>
+</body>
+</html>

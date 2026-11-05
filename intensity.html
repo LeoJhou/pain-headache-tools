@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<title>疼痛強度量表 NRS、VRS、VAS</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --ink: #15202c;
+  --muted: #55636f;
+  --line: #cfd7df;
+  --line-strong: #15202c;
+  --blue: #123f75;
+  --on-blue: #ffffff;
+  --blue-soft: #e6eef7;
+  --press: #eef2f6;
+  --bar: #ffffff;
+  --sev-none-bg: #e4e8ec;
+  --sev-none-ink: #15202c;
+  --sev-mild-bg: #1b6e45;
+  --sev-mod-bg: #a85200;
+  --sev-sev-bg: #a8231c;
+  --sev-ink: #ffffff;
+  --gutter: 16px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12181f;
+    --ink: #e7ecf1;
+    --muted: #9dabb8;
+    --line: #35414d;
+    --line-strong: #e7ecf1;
+    --blue: #93bbea;
+    --on-blue: #0e1620;
+    --blue-soft: #1d2d41;
+    --press: #1e2731;
+    --bar: #171f27;
+    --sev-none-bg: #35414d;
+    --sev-none-ink: #e7ecf1;
+    --sev-mild-bg: #72d3a2;
+    --sev-mod-bg: #f1b268;
+    --sev-sev-bg: #f49c93;
+    --sev-ink: #10161d;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  -webkit-tap-highlight-color: transparent;
+}
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px var(--gutter) calc(112px + env(safe-area-inset-bottom));
+}
+button, input { font: inherit; color: inherit; }
+button { touch-action: manipulation; cursor: pointer; background: none; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.en { font-size: 12.5px; color: var(--muted); }
+a { color: var(--blue); }
+
+/* 表頭 */
+header { border-bottom: 2px solid var(--line-strong); padding-bottom: 12px; }
+h1 { margin: 0; font-size: 23px; line-height: 1.25; font-weight: 600; letter-spacing: .01em; }
+header .en { display: block; margin-top: 3px; }
+
+.tools { display: grid; grid-template-columns: repeat(4, 1fr); margin: 14px 0 0; }
+.tools button {
+  min-height: 44px; padding: 4px 2px; font-size: 15px;
+  border: 1px solid var(--line); margin-left: -1px;
+}
+.tools button:first-child { margin-left: 0; border-radius: 4px 0 0 4px; }
+.tools button:last-child { border-radius: 0 4px 4px 0; }
+.tools button:active { background: var(--press); }
+.tools button.arm { background: var(--sev-sev-bg); border-color: var(--sev-sev-bg); color: var(--sev-ink); position: relative; font-size: 13px; }
+
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; margin-top: 14px; }
+.fields label { display: block; font-size: 13px; color: var(--muted); min-width: 0; }
+.fields .wide { grid-column: 1 / -1; }
+.fields input {
+  display: block; width: 100%; min-width: 0; min-height: 44px; margin-top: 3px;
+  padding: 8px 10px; font-size: 16px; color: var(--ink);
+  background: transparent; border: 1px solid var(--line); border-radius: 4px;
+  -webkit-appearance: none; appearance: none;
+}
+.note { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+
+.sample {
+  margin: 14px 0 0; padding: 8px 12px; font-size: 14px;
+  border-left: 3px solid var(--blue); background: var(--blue-soft);
+}
+
+/* 區段 */
+section { margin-top: 26px; }
+.sec-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  padding-bottom: 6px; border-bottom: 2px solid var(--line-strong);
+}
+h2 { margin: 0; font-size: 18px; font-weight: 600; }
+.sec-score { font-size: 17px; font-weight: 600; white-space: nowrap; }
+.sec-score small { font-size: 13px; font-weight: 400; color: var(--muted); }
+
+/* 0–10 按鈕 */
+.grid { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 11px; }
+.grid button {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 56px; padding: 0; font-size: 19px; line-height: 1.1;
+  border: 1px solid var(--line); margin: -1px 0 0 -1px;
+}
+.grid button small { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.grid button:active { background: var(--press); }
+.grid button[aria-pressed="true"] {
+  position: relative; z-index: 1; background: var(--blue); border-color: var(--blue); color: var(--on-blue); font-weight: 600;
+}
+.grid button[aria-pressed="true"] small { color: var(--on-blue); }
+.grid button.zero[aria-pressed="true"] { background: var(--blue-soft); color: var(--blue); }
+.grid button.zero[aria-pressed="true"] small { color: var(--blue); }
+.grid button:disabled { color: var(--muted); opacity: .45; cursor: default; }
+.grid button:focus-visible { position: relative; z-index: 2; }
+.grid .half { font-size: 15px; }
+.anchors { display: flex; justify-content: space-between; gap: 8px; margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+
+/* VRS */
+.vrs { list-style: none; margin: 0; padding: 0; }
+.vrs button {
+  display: flex; align-items: baseline; gap: 12px; width: 100%; min-height: 50px;
+  padding: 10px 12px; text-align: left; border: 0; border-bottom: 1px solid var(--line);
+}
+.vrs button:active { background: var(--press); }
+.vrs button[aria-pressed="true"] { background: var(--blue); color: var(--on-blue); font-weight: 600; }
+.vrs button[aria-pressed="true"] .en { color: var(--on-blue); font-weight: 400; }
+
+/* 治療反應 */
+.change { margin: 12px 0 0; font-size: 15px; }
+.change b { font-weight: 600; }
+
+/* 頁尾 */
+footer { margin-top: 30px; border-top: 2px solid var(--line-strong); }
+details { border-bottom: 1px solid var(--line); }
+summary { min-height: 48px; padding: 13px 0; cursor: pointer; font-weight: 600; }
+details div { padding-bottom: 14px; font-size: 14.5px; }
+details p { margin: 0 0 8px; }
+details dl { margin: 0; }
+details dt { font-weight: 600; margin-top: 10px; }
+details dt:first-child { margin-top: 0; }
+details dd { margin: 2px 0 0; }
+.todo { color: var(--muted); }
+
+/* 底部判讀列 */
+.dock {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+  background: var(--bar); border-top: 2px solid var(--line-strong);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.dock-in { max-width: 640px; margin: 0 auto; }
+.panel { padding: 14px var(--gutter) 6px; max-height: 62vh; overflow-y: auto; border-bottom: 1px solid var(--line); }
+.panel[hidden] { display: none; }
+.panel h3 { margin: 14px 0 0; font-size: 14px; font-weight: 600; }
+.panel h3:first-child { margin-top: 0; }
+.cut { margin: 4px 0 0; padding: 0; list-style: none; font-size: 14px; }
+.cut li { padding: 4px 0 4px 10px; border-left: 3px solid transparent; }
+.cut li.on { font-weight: 600; border-left-color: var(--ink); }
+.panel .note { margin: 10px 0 8px; }
+
+.bar {
+  display: grid; grid-template-columns: repeat(3, auto) minmax(0, 1fr) 20px; align-items: center; gap: 14px;
+  width: 100%; min-height: 66px; padding: 8px var(--gutter); border: 0; text-align: left;
+}
+.bar .cell > span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.2; }
+.bar .cell b { display: flex; align-items: center; gap: 4px; min-height: 28px; font-size: 24px; line-height: 1.15; font-weight: 600; white-space: nowrap; }
+.status { justify-self: end; text-align: right; font-size: 13.5px; color: var(--muted); line-height: 1.25; }
+.badge { display: inline-block; padding: 3px 6px; border-radius: 3px; font-size: 14px; line-height: 1.2; font-weight: 600; white-space: nowrap; }
+.badge.none { background: var(--sev-none-bg); color: var(--sev-none-ink); }
+.badge.mild { background: var(--sev-mild-bg); color: var(--sev-ink); }
+.badge.mod { background: var(--sev-mod-bg); color: var(--sev-ink); }
+.badge.sev { background: var(--sev-sev-bg); color: var(--sev-ink); }
+.chev { width: 16px; height: 16px; transition: transform .16s ease; }
+.bar[aria-expanded="true"] .chev { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
+@media (max-width: 350px) {
+  .bar { gap: 9px; padding-left: 12px; padding-right: 12px; }
+  .bar .cell b { font-size: 21px; }
+  .status { font-size: 12.5px; }
+}
+
+.print-only { display: none; }
+
+/* 列印：A4 一頁 */
+@media print {
+  :root {
+    color-scheme: light;
+    --bg: #fff; --ink: #000; --muted: #444; --line: #999; --line-strong: #000;
+    --blue: #000; --on-blue: #000; --blue-soft: #fff; --sev-ink: #000;
+  }
+  @page { size: A4; margin: 12mm; }
+  body { font-size: 11pt; line-height: 1.3; }
+  main { max-width: none; padding: 0 .3mm; }
+  .tools, .dock, .note, .screen-only, footer details { display: none !important; }
+  footer { border: 0; margin: 0; }
+  h1 { font-size: 16pt; }
+  header { padding-bottom: 5px; }
+  .fields { grid-template-columns: 1fr 1fr 2fr; margin-top: 6px; gap: 6px; }
+  .fields .wide { grid-column: auto; }
+  .fields label { font-size: 9pt; color: #000; }
+  .fields input { min-height: 0; margin-top: 0; padding: 2px 0; border: 0; border-bottom: 1px solid #000; border-radius: 0; font-size: 11pt; }
+  .fields input::-webkit-calendar-picker-indicator { display: none; }
+  .sample { margin-top: 6px; padding: 3px 8px; border-left: 3px solid #000; font-size: 10pt; }
+  .print-only { display: block; }
+  .print-sum { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 8px; border: 1px solid #000; }
+  .print-sum div { padding: 3px 6px; border-left: 1px solid #000; }
+  .print-sum div:first-child { border-left: 0; }
+  .print-sum span { display: block; font-size: 8.5pt; }
+  .print-sum b { font-size: 12pt; }
+  section { margin-top: 12px; break-inside: avoid; }
+  .sec-head { padding-bottom: 2px; border-bottom-width: 1px; }
+  h2 { font-size: 11.5pt; }
+  .sec-score { font-size: 11pt; }
+  .sec-score small { font-size: 9pt; }
+  .en { font-size: 8pt; color: #333; }
+  .grid { grid-template-columns: repeat(11, 1fr); margin-top: 5px; }
+  .grid button { height: 24px; font-size: 11pt; margin-top: 0; color: #666; border-color: #bbb; }
+  .grid button small { display: none; }
+  .grid button[aria-pressed="true"], .vrs button[aria-pressed="true"] {
+    background: none; color: #000; font-weight: 700; outline: 2px solid #000; outline-offset: -2px;
+  }
+  .legend { margin: 3px 0 0; font-size: 8.5pt; }
+  .anchors { margin-top: 2px; font-size: 8.5pt; color: #000; }
+  .vrs { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: 3mm; margin-top: 4px; }
+  .vrs button { min-height: 0; padding: 3px 4px; gap: 5px; font-size: 10.5pt; color: #666; border: 1px solid #bbb; }
+  .vrs button[aria-pressed="true"] .en { color: #000; }
+  #vasGrid, #vasAnchors { display: none; }
+  .vas-print { display: flex; align-items: center; gap: 4mm; margin-top: 7mm; font-size: 10pt; }
+  .vas-line {
+    position: relative; box-sizing: content-box; width: 100mm; height: 9mm; flex: none;
+  }
+  .vas-line::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: .35mm solid #000;
+  }
+  .vas-line .end { position: absolute; top: 0; bottom: 0; border-left: .35mm solid #000; margin-left: -.175mm; }
+  .vas-mark { position: absolute; top: -1mm; bottom: -1mm; border-left: .8mm solid #000; margin-left: -.4mm; }
+  .change { margin-top: 5px; font-size: 10.5pt; }
+  .print-foot { margin-top: 12px; padding-top: 4px; border-top: 1px solid #000; font-size: 8.5pt; line-height: 1.3; }
+  .print-foot p { margin: 0 0 2px; }
+}
+@media not print { .legend { display: none; } }
+.home-link{display:inline-flex;align-items:center;min-height:44px;margin:-12px 0 0;color:var(--blue);font-size:15px;text-decoration:none}@media print{.home-link{display:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <a class="home-link" href="index.html">‹ 首頁</a>
+    <h1>疼痛強度量表</h1>
+    <span class="en" lang="en">Numeric, Verbal and Visual Analogue Pain Rating Scales</span>
+    <div class="tools">
+      <button type="button" id="btnSample">範例</button>
+      <button type="button" id="btnReset">重設</button>
+      <button type="button" id="btnPrint">列印</button>
+      <button type="button" id="btnCsv">匯出 CSV</button>
+    </div>
+    <div class="fields">
+      <label>病歷號<input id="mrn" autocomplete="off" inputmode="text"></label>
+      <label>日期<input id="date" type="date"></label>
+      <label class="wide">備註<input id="memo" autocomplete="off"></label>
+    </div>
+    <p class="note">不儲存。關閉或重新整理就清空。</p>
+    <p class="sample" id="sampleFlag" hidden>範例資料，不是真實病人。</p>
+    <div class="print-only print-sum" id="printSum"></div>
+  </header>
+
+  <section aria-labelledby="h-n">
+    <div class="sec-head">
+      <h2 id="h-n">數字等級 <span class="en" lang="en">NRS</span></h2>
+      <span class="sec-score" id="scoreN"></span>
+    </div>
+    <div class="grid" id="nrsGrid" role="group" aria-label="NRS 分數"></div>
+    <p class="anchors"><span>0 不痛 <span lang="en">No pain</span></span><span>10 最痛 <span lang="en">Worst pain</span></span></p>
+    <p class="legend print-only">0 不痛；1–3 輕度；4–6 中度；7–10 嚴重</p>
+  </section>
+
+  <section aria-labelledby="h-r">
+    <div class="sec-head">
+      <h2 id="h-r">口語等級 <span class="en" lang="en">VRS</span></h2>
+      <span class="sec-score" id="scoreR"></span>
+    </div>
+    <ul class="vrs" id="listR"></ul>
+  </section>
+
+  <section aria-labelledby="h-v">
+    <div class="sec-head">
+      <h2 id="h-v">視覺類比 <span class="en" lang="en">VAS</span></h2>
+      <span class="sec-score" id="scoreV"></span>
+    </div>
+    <div class="grid" id="vasGrid" role="group" aria-label="VAS 公分"></div>
+    <p class="anchors" id="vasAnchors"><span>0 cm 不痛</span><span>10 cm 最痛</span></p>
+    <p class="note">VAS 原本是不標數字的 10 cm 線，病人畫記後量距離。列印頁有這條線；這裡輸入量到的公分。</p>
+    <div class="print-only vas-print">
+      <span>不痛</span>
+      <div class="vas-line"><i class="end" style="left:0"></i><i class="end" style="left:100mm"></i><i class="vas-mark" id="vasMark" hidden></i></div>
+      <span>最痛</span>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-c">
+    <div class="sec-head">
+      <h2 id="h-c">治療前 NRS <span class="en" lang="en">Baseline</span></h2>
+      <span class="sec-score" id="scoreB"></span>
+    </div>
+    <div class="grid" id="baseGrid" role="group" aria-label="治療前 NRS 分數"></div>
+    <p class="change" id="changeText"></p>
+  </section>
+
+  <footer>
+    <details>
+      <summary>計分方式</summary>
+      <div>
+        <p>NRS：0–10 整數。VRS：四級，匯出時記 0–3 順位。VAS：距「不痛」端的公分，0–10，這裡每格 0.5。</p>
+        <p>三者分開記錄，不互相換算。時間範圍常用「目前」或「過去 24 小時」，可寫在備註。</p>
+        <p>治療反應用上面的 NRS 當治療後，與治療前 NRS 比較：下降分數＝治療前－治療後；下降百分比＝下降分數÷治療前。</p>
+      </div>
+    </details>
+    <details>
+      <summary>工具比較（講義 p8）</summary>
+      <div>
+        <dl>
+          <dt>VRS 口語等級</dt>
+          <dd>講義：None、mild、moderate、severe；老人易用；研究再現性不足。</dd>
+          <dd class="todo">查到：老人偏好口語量表（Karcioglu 2018）；65 歲以上 201 人比較 5 種量表，偏好 VRS 12%、NRS 35%（Nimmaanrat 2024）。缺點查到的是選項少、精確度受限；「再現性不足」沒查到。</dd>
+          <dt>二元 Binary</dt>
+          <dd>講義：Is pain 60% relieved? Yes／No；簡短，但常誤導病人。</dd>
+          <dd class="todo">出處沒查到。</dd>
+          <dt>NRS 數字等級</dt>
+          <dd>講義：0–10；易懂；數字可當錨點。</dd>
+          <dd class="todo">查到：可口述、可電話，計分比 VAS 簡單（Hawker 2011）；多數情境適用（Hjermstad 2011）。「數字當錨點」沒查到針對 NRS 的敘述；Hawker 寫的是 VAS 中間不標數字，避免分數聚集。</dd>
+          <dt><a href="faces.html">Faces 臉譜（另一頁）</a></dt>
+          <dd>講義：笑臉到極不開心；最適合溝通有障礙者。</dd>
+          <dd class="todo">查到：認知障礙組偏好 FPS-R 54%，但與其他量表相關性較弱（Karcioglu 2018）。「最適合」沒查到。</dd>
+          <dt>VAS 視覺類比</dt>
+          <dd>講義：10 cm 連續水平線；效度與信度高；稍費時。</dd>
+          <dd class="todo">查到：線長與兩端相符；再測信度識字者 0.94、不識字者 0.71；完成不到 1 分鐘；不能口述或電話；老人、認知或動作障礙者較難完成（Hawker 2011）。65 歲以上錯誤率 6.4% 最高、偏好 5% 最低（Nimmaanrat 2024）。</dd>
+        </dl>
+      </div>
+    </details>
+    <details>
+      <summary>出處與查證</summary>
+      <div>
+        <p>2026-11-04 查證。讀到全文：Hawker、Karcioglu、Woo、Nimmaanrat。只看到摘要或二手引用：Farrar、Jensen、Hjermstad、IMMPACT、Serlin。</p>
+        <p>NRS 切點 1–3、4–6、7–10 是講義版。文獻沒有共識：Serlin 1995 用 1–4、5–6、7–10；回顧研究的癌痛多用 4 與 6 為界，非癌痛 3 或 4、6 或 7（Woo 2015）。</p>
+        <p>VAS 切點 0–4、5–44、45–74、75–100 mm 來自術後病人（Jensen 2003，Hawker 2011 引用），講義沒有。Hawker 不建議中間標數字或文字。</p>
+        <p>≥30% 或 2 分：講義寫 positive treatment response。Farrar 2001 寫 clinically important difference，來自 10 個 pregabalin 慢性痛試驗 2724 人；是平均值，基準分越高需要的分數差越大，百分比較不受基準分影響。IMMPACT 2008：≥30% 中度重要、≥50% 大幅改善。</p>
+        <p class="todo">講義 p7 只有影片的黑底畫面，內容未核對錄影。中文用語取自講義。</p>
+        <p>條款：NRS、VRS 沒查到官方條款，這裡只用通用形式。VAS：Hawker 2011 寫 public domain。</p>
+        <p>Hawker GA, et al. Arthritis Care Res. 2011;63(S11):S240–S252.<br>
+        Hjermstad MJ, et al. J Pain Symptom Manage. 2011;41(6):1073–1093.<br>
+        Karcioglu O, et al. Am J Emerg Med. 2018;36(4):707–714.<br>
+        Nimmaanrat S, et al. BMC Geriatr. 2024;24:556.<br>
+        Serlin RC, et al. Pain. 1995;61(2):277–284.<br>
+        Woo A, et al. Ann Palliat Med. 2015;4(4):176–183.<br>
+        Jensen MP, Chen C, Brugger AM. J Pain. 2003;4(7):407–414.<br>
+        Farrar JT, et al. Pain. 2001;94(2):149–158.<br>
+        Dworkin RH, et al. J Pain. 2008;9(2):105–121.</p>
+      </div>
+    </details>
+    <div class="print-only print-foot">
+      <p>VAS 線長 10 cm，請用 100% 比例列印；影印可能改變線長。</p>
+      <p>NRS 切點取自洪志憲老師講義，文獻沒有共識。VAS 切點：Jensen 2003（術後），0–4、5–44、45–74、75–100 mm。≥30% 或 2 分：Farrar 2001（慢性痛）。NRS、VRS 沒查到官方條款。</p>
+    </div>
+  </footer>
+</main>
+
+<div class="dock">
+  <div class="dock-in">
+    <div class="panel" id="panel" hidden>
+      <h3>NRS（講義）</h3>
+      <ul class="cut" id="cutN"></ul>
+      <h3>VAS（Jensen 2003）</h3>
+      <ul class="cut" id="cutV"></ul>
+      <h3>治療反應</h3>
+      <p class="change" id="pChange"></p>
+      <p class="note">NRS 切點沒有共識；VAS 切點來自術後病人。詳見頁尾。</p>
+    </div>
+    <button type="button" class="bar" id="bar" aria-expanded="false" aria-controls="panel">
+      <span class="cell"><span>NRS</span><b id="bN"></b></span>
+      <span class="cell"><span>VRS</span><b id="bR"></b></span>
+      <span class="cell"><span>VAS</span><b id="bV"></b></span>
+      <span class="status" id="status" aria-live="polite"></span>
+      <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 10l5-5 5 5"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+const TIER = {
+  none: { key: 'none', label: '不痛', short: '無' },
+  mild: { key: 'mild', label: '輕度', short: '輕' },
+  mod: { key: 'mod', label: '中度', short: '中' },
+  sev: { key: 'sev', label: '嚴重', short: '重' }
+};
+const VRS = [['none', '不痛', 'None'], ['mild', '輕度', 'Mild'], ['mod', '中度', 'Moderate'], ['sev', '嚴重', 'Severe']];
+const CUT_N = [['none', '不痛：0'], ['mild', '輕度：1–3'], ['mod', '中度：4–6'], ['sev', '嚴重：7–10']];
+const CUT_V = [['none', '不痛：0–0.4 cm'], ['mild', '輕度：0.5–4.4 cm'], ['mod', '中度：4.5–7.4 cm'], ['sev', '嚴重：7.5–10 cm']];
+
+const $ = id => document.getElementById(id);
+const state = { nrs: null, vrs: null, vasBase: null, half: false, base: null, sample: false };
+
+const vasValue = () => state.vasBase === null ? null : state.vasBase + (state.half ? 0.5 : 0);
+
+function nrsTier(v) {
+  if (v === null) return null;
+  if (v === 0) return TIER.none;
+  if (v <= 3) return TIER.mild;
+  if (v <= 6) return TIER.mod;
+  return TIER.sev;
+}
+function vasTier(cm) {
+  if (cm === null) return null;
+  const mm = cm * 10;
+  if (mm <= 4) return TIER.none;
+  if (mm <= 44) return TIER.mild;
+  if (mm <= 74) return TIER.mod;
+  return TIER.sev;
+}
+function changeOf(base, now) {
+  if (base === null || now === null) return null;
+  const drop = base - now;
+  return {
+    drop,
+    pct: base === 0 ? null : Math.round(drop / base * 100),
+    pass30: base > 0 && drop * 10 >= base * 3,
+    pass2: drop >= 2
+  };
+}
+function touched() { state.sample = false; update(); }
+
+function numButton(grid, v, onClick, small) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.dataset.v = v;
+  if (v === 0) b.classList.add('zero');
+  b.innerHTML = small ? `${v}<small>${small}</small>` : String(v);
+  b.addEventListener('click', onClick);
+  grid.appendChild(b);
+}
+for (let v = 0; v <= 10; v++) {
+  const short = nrsTier(v).short;
+  numButton($('nrsGrid'), v, () => { state.nrs = state.nrs === v ? null : v; touched(); }, short);
+  numButton($('baseGrid'), v, () => { state.base = state.base === v ? null : v; touched(); }, short);
+  numButton($('vasGrid'), v, () => {
+    if (state.vasBase === v) { state.vasBase = null; state.half = false; }
+    else { state.vasBase = v; if (v === 10) state.half = false; }
+    touched();
+  });
+}
+const halfBtn = document.createElement('button');
+halfBtn.type = 'button';
+halfBtn.className = 'half';
+halfBtn.id = 'half';
+halfBtn.textContent = '+0.5';
+halfBtn.addEventListener('click', () => { state.half = !state.half; touched(); });
+$('vasGrid').appendChild(halfBtn);
+
+VRS.forEach(([key, zh, en], v) => {
+  const li = document.createElement('li');
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.dataset.vrs = v;
+  b.innerHTML = `<span>${zh} <span class="en" lang="en">${en}</span></span>`;
+  b.addEventListener('click', () => { state.vrs = state.vrs === v ? null : v; touched(); });
+  li.appendChild(b);
+  $('listR').appendChild(li);
+});
+function fillCut(id, rows) {
+  rows.forEach(([key, text]) => {
+    const li = document.createElement('li');
+    li.dataset.level = key;
+    li.textContent = text;
+    $(id).appendChild(li);
+  });
+}
+fillCut('cutN', CUT_N);
+fillCut('cutV', CUT_V);
+
+function press(grid, value) {
+  grid.querySelectorAll('button[data-v]').forEach(b => {
+    b.setAttribute('aria-pressed', value === +b.dataset.v);
+  });
+}
+function badge(tier, short) {
+  return tier ? `<span class="badge ${tier.key}">${short ? tier.short : tier.label}</span>` : '';
+}
+function changeSentence(c) {
+  if (!c) return '';
+  if (c.drop < 0) return `上升 ${-c.drop} 分${c.pct === null ? '' : `（${-c.pct}%）`}`;
+  if (c.drop === 0) return '沒有變化';
+  return `下降 ${c.drop} 分（${c.pct}%）`;
+}
+function verdict(c) {
+  if (!c || c.drop <= 0) return '';
+  if (c.pass30 && c.pass2) return '達 ≥30%，也達 ≥2 分';
+  if (c.pass30) return '達 ≥30%，未達 ≥2 分';
+  if (c.pass2) return '達 ≥2 分，未達 ≥30%';
+  return '未達 ≥30%，也未達 ≥2 分';
+}
+
+function update() {
+  const vas = vasValue();
+  const tN = nrsTier(state.nrs), tV = vasTier(vas);
+  const tR = state.vrs === null ? null : TIER[VRS[state.vrs][0]];
+  const c = changeOf(state.base, state.nrs);
+
+  press($('nrsGrid'), state.nrs);
+  press($('baseGrid'), state.base);
+  press($('vasGrid'), state.vasBase);
+  halfBtn.setAttribute('aria-pressed', state.half);
+  halfBtn.disabled = state.vasBase === null || state.vasBase === 10;
+  document.querySelectorAll('[data-vrs]').forEach(b => {
+    b.setAttribute('aria-pressed', state.vrs === +b.dataset.vrs);
+  });
+
+  $('scoreN').innerHTML = `${state.nrs === null ? '—' : state.nrs}<small>／10</small>`;
+  $('scoreR').textContent = tR ? tR.label : '—';
+  $('scoreV').innerHTML = `${vas === null ? '—' : vas}<small> cm</small>`;
+  $('scoreB').innerHTML = `${state.base === null ? '—' : state.base}<small>／10</small>`;
+
+  $('bN').innerHTML = state.nrs === null ? '—' : `${state.nrs}${badge(tN, true)}`;
+  $('bR').innerHTML = tR ? badge(tR) : '—';
+  $('bV').innerHTML = vas === null ? '—' : `${vas}${badge(tV, true)}`;
+
+  const sentence = changeSentence(c), v = verdict(c);
+  $('status').textContent = c ? (c.drop > 0 ? `降 ${c.drop} 分 ${c.pct}%` : sentence) : '';
+
+  let text = '';
+  if (c) text = `<b>${sentence}</b>${v ? `：${v}` : ''}`;
+  else if (state.base !== null) text = '還沒選上面的 NRS，無法比較。';
+  else if (state.nrs !== null) text = '選治療前分數後，顯示下降分數與百分比。';
+  $('changeText').innerHTML = text;
+  $('pChange').innerHTML = text || '填 NRS 與治療前 NRS 後顯示。';
+
+  document.querySelectorAll('#cutN li').forEach(li => li.classList.toggle('on', !!tN && li.dataset.level === tN.key));
+  document.querySelectorAll('#cutV li').forEach(li => li.classList.toggle('on', !!tV && li.dataset.level === tV.key));
+
+  $('sampleFlag').hidden = !state.sample;
+
+  const mark = $('vasMark');
+  mark.hidden = vas === null;
+  mark.style.left = vas === null ? '' : `${vas * 10}mm`;
+
+  const cells = [
+    ['NRS', state.nrs === null ? '—' : `${state.nrs} ${tN.label}`],
+    ['VRS', tR ? tR.label : '—'],
+    ['VAS', vas === null ? '—' : `${vas} cm ${tV.label}`],
+    ['治療前 NRS', state.base === null ? '—' : state.base],
+    ['變化', c ? (c.drop > 0 ? `降 ${c.drop} 分` : c.drop < 0 ? `升 ${-c.drop} 分` : '無') : '—'],
+    ['百分比', c && c.pct !== null ? `${Math.abs(c.pct)}%` : '—']
+  ];
+  $('printSum').innerHTML = cells.map(([k, val]) => `<div><span>${k}</span><b>${val}</b></div>`).join('');
+}
+
+function today() {
+  const d = new Date();
+  const p = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+
+$('btnSample').addEventListener('click', () => {
+  state.nrs = 4; state.vrs = 2; state.vasBase = 4; state.half = true; state.base = 7; state.sample = true;
+  disarm();
+  update();
+});
+
+/* 重設要按兩次，避免單手誤觸 */
+let armTimer = null;
+const resetBtn = $('btnReset');
+function disarm() {
+  clearTimeout(armTimer);
+  resetBtn.classList.remove('arm');
+  resetBtn.textContent = '重設';
+}
+function hasData() {
+  return state.nrs !== null || state.vrs !== null || state.vasBase !== null || state.base !== null ||
+    $('mrn').value || $('memo').value;
+}
+resetBtn.addEventListener('click', () => {
+  if (hasData() && !resetBtn.classList.contains('arm')) {
+    resetBtn.classList.add('arm');
+    resetBtn.textContent = '再按清空';
+    armTimer = setTimeout(disarm, 3000);
+    return;
+  }
+  disarm();
+  state.nrs = null; state.vrs = null; state.vasBase = null; state.half = false; state.base = null; state.sample = false;
+  $('mrn').value = ''; $('memo').value = ''; $('date').value = today();
+  update();
+});
+
+$('btnPrint').addEventListener('click', () => window.print());
+
+function csvCell(v) {
+  let t = v === null || v === undefined ? '' : String(v);
+  if (typeof v === 'string' && /^[=+\-@\t\r]/.test(t)) t = "'" + t;
+  return /[",\n\r]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t;
+}
+function buildCsv() {
+  const vas = vasValue();
+  const tN = nrsTier(state.nrs), tV = vasTier(vas);
+  const c = changeOf(state.base, state.nrs);
+  const yn = (ok, val) => ok ? (val ? '是' : '否') : '';
+  const rows = [
+    ['項目', '英文', '值'],
+    ['量表', 'NRS／VRS／VAS', ''],
+    ['範例資料', '', state.sample ? '是' : '否'],
+    ['病歷號', '', $('mrn').value],
+    ['日期', '', $('date').value],
+    ['備註', '', $('memo').value],
+    ['NRS', 'NRS', state.nrs],
+    ['NRS 分級（講義）', '', tN ? tN.label : ''],
+    ['VRS 順位', 'VRS', state.vrs],
+    ['VRS 用詞', '', state.vrs === null ? '' : VRS[state.vrs][1]],
+    ['VAS 公分', 'VAS', vas],
+    ['VAS 分級（Jensen 2003）', '', tV ? tV.label : ''],
+    ['治療前 NRS', 'Baseline NRS', state.base],
+    ['下降分數', 'Reduction', c ? c.drop : null],
+    ['下降百分比', 'Reduction %', c ? c.pct : null],
+    ['達 ≥30%', '', yn(!!c && c.pct !== null, !!c && c.pass30)],
+    ['達 ≥2 分', '', yn(!!c, !!c && c.pass2)]
+  ];
+  return '﻿' + rows.map(r => r.map(csvCell).join(',')).join('\r\n');
+}
+$('btnCsv').addEventListener('click', () => {
+  const url = URL.createObjectURL(new Blob([buildCsv()], { type: 'text/csv;charset=utf-8' }));
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `疼痛強度_${$('date').value || today()}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+
+$('bar').addEventListener('click', () => {
+  const open = $('bar').getAttribute('aria-expanded') === 'true';
+  $('bar').setAttribute('aria-expanded', !open);
+  $('panel').hidden = open;
+});
+
+$('date').value = today();
+update();
+</script>
+</body>
+</html>

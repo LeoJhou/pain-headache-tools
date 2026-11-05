@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<title>偏頭痛 ICHD-3 診斷</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --ink: #15202c;
+  --muted: #55636f;
+  --line: #cfd7df;
+  --line-strong: #15202c;
+  --blue: #123f75;
+  --on-blue: #ffffff;
+  --blue-soft: #e6eef7;
+  --press: #eef2f6;
+  --bar: #ffffff;
+  --sev-none-bg: #e4e8ec;
+  --sev-none-ink: #15202c;
+  --sev-mod-bg: #a85200;
+  --sev-sev-bg: #a8231c;
+  --sev-ink: #ffffff;
+  --gutter: 16px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12181f;
+    --ink: #e7ecf1;
+    --muted: #9dabb8;
+    --line: #35414d;
+    --line-strong: #e7ecf1;
+    --blue: #93bbea;
+    --on-blue: #0e1620;
+    --blue-soft: #1d2d41;
+    --press: #1e2731;
+    --bar: #171f27;
+    --sev-none-bg: #35414d;
+    --sev-none-ink: #e7ecf1;
+    --sev-mod-bg: #f1b268;
+    --sev-sev-bg: #f49c93;
+    --sev-ink: #10161d;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  -webkit-tap-highlight-color: transparent;
+}
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px var(--gutter) calc(112px + env(safe-area-inset-bottom));
+}
+button, input, textarea { font: inherit; color: inherit; }
+button { touch-action: manipulation; cursor: pointer; background: none; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.en { font-size: 12.5px; color: var(--muted); }
+
+/* 表頭 */
+header { border-bottom: 2px solid var(--line-strong); padding-bottom: 12px; }
+h1 { margin: 0; font-size: 23px; line-height: 1.25; font-weight: 600; letter-spacing: .01em; }
+header .en { display: block; margin-top: 3px; }
+
+.tools { display: grid; grid-template-columns: repeat(4, 1fr); margin: 14px 0 0; }
+.tools button {
+  min-height: 44px; padding: 4px 2px; font-size: 15px;
+  border: 1px solid var(--line); margin-left: -1px;
+}
+.tools button:first-child { margin-left: 0; border-radius: 4px 0 0 4px; }
+.tools button:last-child { border-radius: 0 4px 4px 0; }
+.tools button:active { background: var(--press); }
+.tools button.arm { background: var(--sev-sev-bg); border-color: var(--sev-sev-bg); color: var(--sev-ink); position: relative; font-size: 13px; }
+
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; margin-top: 14px; }
+.fields label { display: block; font-size: 13px; color: var(--muted); min-width: 0; }
+.fields .wide { grid-column: 1 / -1; }
+.fields input {
+  display: block; width: 100%; min-width: 0; min-height: 44px; margin-top: 3px;
+  padding: 8px 10px; font-size: 16px; color: var(--ink);
+  background: transparent; border: 1px solid var(--line); border-radius: 4px;
+  -webkit-appearance: none; appearance: none;
+}
+.note { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+
+.sample {
+  margin: 14px 0 0; padding: 8px 12px; font-size: 14px;
+  border-left: 3px solid var(--blue); background: var(--blue-soft);
+}
+
+/* 區段 */
+section { margin-top: 26px; }
+.sec-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  padding-bottom: 6px; border-bottom: 2px solid var(--line-strong);
+}
+h2 { margin: 0; font-size: 18px; font-weight: 600; }
+.sec-score { font-size: 17px; font-weight: 600; white-space: nowrap; }
+.sec-score small { font-size: 13px; font-weight: 400; color: var(--muted); }
+
+/* 準則小標 */
+.crit { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 14px 0 5px; border-bottom: 1px solid var(--line); }
+.crit h3 { margin: 0; font-size: 15px; font-weight: 600; }
+.crit .st { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.crit .st.ok { color: var(--blue); font-weight: 600; }
+
+/* 勾選列 */
+.checks { list-style: none; margin: 0; padding: 0; }
+.chk {
+  display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 11px; align-items: start;
+  width: 100%; min-height: 48px; padding: 11px 6px 11px 4px; border: 0;
+  border-bottom: 1px solid var(--line); text-align: left; line-height: 1.38;
+}
+.chk:active { background: var(--press); }
+.chk .box {
+  display: flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; margin-top: 1px; border: 1.5px solid var(--muted); border-radius: 3px;
+}
+.chk .box svg { display: none; width: 16px; height: 16px; fill: none; stroke: var(--on-blue); stroke-width: 2.4; }
+.chk.radio .box { border-radius: 50%; }
+.chk.radio .box i { display: none; width: 10px; height: 10px; border-radius: 50%; background: var(--on-blue); }
+.chk[aria-pressed="true"] { background: var(--blue-soft); }
+.chk[aria-pressed="true"] .box { background: var(--blue); border-color: var(--blue); }
+.chk[aria-pressed="true"] .box svg { display: block; }
+.chk.radio[aria-pressed="true"] .box i { display: block; }
+.chk .code { font-weight: 600; margin-right: 3px; }
+.chk .en { margin-left: 5px; }
+.lv { font-size: 12.5px; font-weight: 600; white-space: nowrap; margin-top: 2px; }
+.lv.emergent { color: var(--sev-sev-bg); }
+.lv.urgent, .lv.orange { color: var(--sev-mod-bg); }
+.chk[aria-disabled="true"] { cursor: default; }
+
+/* 整句英文收合 */
+details { border-bottom: 1px solid var(--line); }
+summary { min-height: 48px; padding: 13px 0; cursor: pointer; font-weight: 600; }
+details.full summary { min-height: 44px; padding: 11px 0; font-size: 14px; font-weight: 400; color: var(--muted); }
+details.full ul { list-style: none; margin: 0; padding: 0 0 12px; font-size: 13.5px; }
+details.full li { padding: 3px 0; }
+details.full b { font-weight: 600; margin-right: 3px; }
+
+/* 頁尾 */
+footer { margin-top: 30px; border-top: 2px solid var(--line-strong); }
+footer details div { padding-bottom: 14px; font-size: 14.5px; }
+footer details p { margin: 0 0 8px; }
+.todo { color: var(--muted); }
+
+/* 判讀內容 */
+.res { font-size: 15px; }
+.res h3 { margin: 12px 0 3px; font-size: 13px; font-weight: 400; color: var(--muted); }
+.res h3:first-child { margin-top: 0; }
+.res .big { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.3; }
+.res .sub { margin: 2px 0 0; font-size: 14px; color: var(--muted); }
+.res ul { margin: 0; padding: 0; list-style: none; font-size: 14.5px; }
+.res li { padding: 3px 0; border-bottom: 1px solid var(--line); }
+.res li:last-child { border-bottom: 0; }
+.res .tag { font-weight: 600; margin-right: 4px; white-space: nowrap; }
+.fact { margin: 10px 0 0; padding-left: 10px; border-left: 3px solid var(--line-strong); font-size: 14px; }
+.res .note { margin: 10px 0 8px; }
+
+/* 底部判讀列 */
+.dock {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+  background: var(--bar); border-top: 2px solid var(--line-strong);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.dock-in { max-width: 640px; margin: 0 auto; }
+.panel { padding: 14px var(--gutter) 6px; max-height: 62vh; overflow-y: auto; border-bottom: 1px solid var(--line); }
+.panel[hidden] { display: none; }
+.bar {
+  display: grid; grid-template-columns: repeat(2, auto) minmax(0, 1fr) 20px; align-items: center; gap: 16px;
+  width: 100%; min-height: 66px; padding: 8px var(--gutter); border: 0; text-align: left;
+}
+.bar .cell { min-width: 0; }
+.bar .cell span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.2; }
+.bar .cell b { display: block; font-size: 24px; line-height: 1.15; font-weight: 600; white-space: nowrap; }
+.bar .cell b small { font-size: 13px; font-weight: 400; color: var(--muted); }
+.status { justify-self: end; text-align: right; font-size: 14px; color: var(--muted); line-height: 1.25; }
+.badge { display: inline-block; padding: 5px 10px; border-radius: 3px; font-size: 15px; font-weight: 600; white-space: nowrap; }
+.badge.none { background: var(--sev-none-bg); color: var(--sev-none-ink); }
+.badge.mod { background: var(--sev-mod-bg); color: var(--sev-ink); }
+.badge.sev { background: var(--sev-sev-bg); color: var(--sev-ink); }
+.badge.def { background: var(--blue); color: var(--on-blue); }
+.badge.prob { background: var(--blue-soft); color: var(--blue); box-shadow: inset 0 0 0 1.5px var(--blue); }
+.chev { width: 16px; height: 16px; transition: transform .16s ease; }
+.bar[aria-expanded="true"] .chev { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
+@media (max-width: 350px) {
+  .bar { gap: 11px; padding-left: 12px; padding-right: 12px; }
+  .bar .cell b { font-size: 21px; }
+  .badge { padding: 5px 7px; font-size: 14px; }
+}
+
+.print-only { display: none; }
+
+/* 列印：A4 */
+@media print {
+  :root {
+    color-scheme: light;
+    --bg: #fff; --ink: #000; --muted: #333; --line: #999; --line-strong: #000;
+    --blue: #000; --on-blue: #000; --blue-soft: #fff; --sev-ink: #000;
+    --sev-sev-bg: #000; --sev-mod-bg: #000;
+  }
+  @page { size: A4; margin: 11mm 12mm; }
+  body { font-size: 10.5pt; line-height: 1.28; }
+  main { max-width: none; padding: 0; }
+  .tools, .dock, .note, footer details, details.full { display: none !important; }
+  footer { border: 0; margin: 0; }
+  h1 { font-size: 15pt; }
+  header { padding-bottom: 4px; }
+  .fields { grid-template-columns: 1fr 1fr 2fr; margin-top: 5px; gap: 6px; }
+  .fields .wide { grid-column: auto; }
+  .fields label { font-size: 9pt; color: #000; }
+  .fields input { min-height: 0; margin-top: 0; padding: 1px 0; border: 0; border-bottom: 1px solid #000; border-radius: 0; font-size: 10.5pt; }
+  .fields input::-webkit-calendar-picker-indicator { display: none; }
+  .sample { margin-top: 5px; padding: 2px 8px; border-left: 3px solid #000; font-size: 9.5pt; }
+  .print-only { display: block; }
+  .print-res { margin-top: 6px; padding: 4px 8px; border: 1px solid #000; }
+  .res { font-size: 9.5pt; }
+  .res h3 { margin: 4px 0 1px; font-size: 8.5pt; color: #000; }
+  .res .big { font-size: 11pt; }
+  .res .sub { font-size: 9pt; color: #000; }
+  .res ul { font-size: 9pt; }
+  .res li { padding: 1px 0; border: 0; }
+  .fact { margin-top: 3px; font-size: 8.5pt; }
+  section { margin-top: 7px; break-inside: avoid; }
+  .sec-head { padding-bottom: 1px; border-bottom-width: 1px; }
+  h2 { font-size: 11pt; }
+  .sec-score { font-size: 10pt; }
+  .crit { padding: 3px 0 1px; }
+  .crit h3 { font-size: 9.5pt; }
+  .crit .st { font-size: 8.5pt; color: #000; }
+  .checks { columns: 2; column-gap: 7mm; }
+  .chk { grid-template-columns: 10px minmax(0, 1fr) auto; gap: 4px; min-height: 0; padding: 1.5px 0; font-size: 9pt; line-height: 1.2; color: #555; border-bottom: 0; break-inside: avoid; }
+  .chk .box { width: 9px; height: 9px; margin-top: 1.5px; border: 1px solid #555; }
+  .chk .box svg { width: 8px; height: 8px; stroke-width: 3; }
+  .chk.radio .box i { width: 5px; height: 5px; }
+  .chk .en { display: none; }
+  .chk[aria-pressed="true"] { color: #000; font-weight: 700; }
+  .chk[aria-pressed="true"] .box { background: none; border-color: #000; }
+  .lv { font-size: 8pt; margin-top: 0; }
+  .print-foot { margin-top: 6px; padding-top: 3px; border-top: 1px solid #000; font-size: 8pt; line-height: 1.25; }
+  .print-foot p { margin: 0 0 1px; }
+}
+.home-link{display:inline-flex;align-items:center;min-height:44px;margin:-12px 0 0;color:var(--blue);font-size:15px;text-decoration:none}@media print{.home-link{display:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <a class="home-link" href="index.html">‹ 首頁</a>
+    <h1>偏頭痛 ICHD-3 診斷</h1>
+    <span class="en" lang="en">ICHD-3 1.1 Migraine without aura, 1.2 Migraine with aura</span>
+    <div class="tools">
+      <button type="button" id="btnSample">範例</button>
+      <button type="button" id="btnReset">重設</button>
+      <button type="button" id="btnPrint">列印</button>
+      <button type="button" id="btnCsv">匯出 CSV</button>
+    </div>
+    <div class="fields">
+      <label>病歷號<input id="mrn" autocomplete="off" inputmode="text"></label>
+      <label>日期<input id="date" type="date"></label>
+      <label class="wide">備註<input id="memo" autocomplete="off"></label>
+    </div>
+    <p class="note">不儲存。關閉或重新整理就清空。</p>
+    <p class="sample" id="sampleFlag" hidden></p>
+    <div class="print-only print-res"><div class="res" id="printResult"></div></div>
+  </header>
+
+  <section aria-labelledby="h-11">
+    <div class="sec-head">
+      <h2 id="h-11">1.1 無預兆偏頭痛</h2>
+      <span class="sec-score" id="s11"></span>
+    </div>
+    <div class="crit"><h3>A 發作次數</h3><span class="st" id="st11a"></span></div>
+    <ul class="checks" id="l11a"></ul>
+    <div class="crit"><h3>B 持續時間</h3><span class="st" id="st11b"></span></div>
+    <ul class="checks" id="l11b"></ul>
+    <div class="crit"><h3>C 頭痛特徵，至少 2 項</h3><span class="st" id="st11c"></span></div>
+    <ul class="checks" id="l11c"></ul>
+    <div class="crit"><h3>D 伴隨症狀，D1 或 D2 兩項都有</h3><span class="st" id="st11d"></span></div>
+    <ul class="checks" id="l11d"></ul>
+    <div class="crit"><h3>E 排除</h3><span class="st" id="st11e"></span></div>
+    <ul class="checks" id="l11e"></ul>
+    <div id="f11"></div>
+  </section>
+
+  <section aria-labelledby="h-12">
+    <div class="sec-head">
+      <h2 id="h-12">1.2 有預兆偏頭痛</h2>
+      <span class="sec-score" id="s12"></span>
+    </div>
+    <div class="crit"><h3>A 發作次數</h3><span class="st" id="st12a"></span></div>
+    <ul class="checks" id="l12a"></ul>
+    <div class="crit"><h3>B 完全可逆的預兆，至少 1 項</h3><span class="st" id="st12b"></span></div>
+    <ul class="checks" id="l12b"></ul>
+    <div class="crit"><h3>C 預兆特徵，至少 3 項</h3><span class="st" id="st12c"></span></div>
+    <ul class="checks" id="l12c"></ul>
+    <div class="crit"><h3>D 排除</h3><span class="st" id="st12d"></span></div>
+    <ul class="checks" id="l12d"></ul>
+    <div id="f12"></div>
+  </section>
+
+  <footer>
+    <details>
+      <summary>判定方式</summary>
+      <div>
+        <p>1.1：E 成立且 A–D 全符合判 1.1；E 成立且 A–D 缺一判 1.5.1。</p>
+        <p>1.2：A、B、C、D 全符合判 1.2。B5 歸 1.2.2、B4 歸 1.2.3、B6 且無 B1 歸 1.2.4，其餘 C6 成立歸 1.2.1.1，不成立歸 1.2.1.2。亞型優先序取自老師工具。</p>
+        <p>1.5.2 依老師工具：B、D 成立，且 A 成立而 C 恰 2 項，或 A 不成立而 C 成立。</p>
+        <p>多數結果並列時，1.2 亞型在前。都未確診才列 1.5.2、1.5.1。</p>
+      </div>
+    </details>
+    <details>
+      <summary>ICHD-3 附註</summary>
+      <div>
+        <p>1.1：少於 5 次但符合其餘準則編 1.5.1。睡著醒來算到醒來。未滿 18 歲可為 2–72 小時。</p>
+        <p>1.2：3 個症狀同時出現可到 3×60 分。運動症狀可到 72 小時。失語一律算單側。</p>
+        <p>1.2.1 要求視覺、感覺及／或言語語言症狀，且沒有運動、腦幹、視網膜症狀。</p>
+        <p>1.2.2 要求至少 2 個腦幹症狀（構音異常、眩暈、耳鳴、聽力減退、複視、非感覺缺損所致共濟失調、GCS ≤13 的意識下降），且沒有運動或視網膜症狀。</p>
+        <p>1.2.3 要求完全可逆運動無力，加上視覺、感覺及／或言語語言症狀。</p>
+        <p>1.2.4 要求單眼正向及／或負向視覺現象，發作時經視野檢查或病人繪圖確認，加上至少 2/3（漸進擴展 ≥5 分、持續 5–60 分、60 分內伴頭痛），並排除其他 amaurosis fugax。</p>
+        <p>有預兆與無預兆發作都有時，兩個診斷都編。同時符合 2.x 與 1.5 時編 2.x。</p>
+      </div>
+    </details>
+    <details>
+      <summary>出處與查證</summary>
+      <div>
+        <p>Headache Classification Committee of the International Headache Society. ICHD-3. Cephalalgia. 2018;38(1):1–211。線上版 ichd-3.org。</p>
+        <p>2026-11-04 查證：已讀 ichd-3.org 1.1、1.2、1.2.1–1.2.4、1.5 原文，1.1 與 1.2 的 A–C 與老師工具相同。</p>
+        <p class="todo">1.2 D 老師寫含排除 TIA；現行原文只有排除句，TIA 寫在評論的鑑別。此處保留老師版。</p>
+        <p class="todo">1.5.2 判定：原文為 A–C 缺一即符合，老師工具要求 C 恰 2 項，此處保留老師版。</p>
+        <p class="todo">亞型判定只看 B 勾選，不檢查 1.2.2 的症狀數、1.2.3 的伴隨症狀、1.2.4 的單眼確認，取自老師工具。</p>
+        <p class="todo">中文譯名取自老師工具，未對官方中文版。</p>
+      </div>
+    </details>
+    <div class="print-only print-foot">
+      <p>Headache Classification Committee of the IHS. ICHD-3. Cephalalgia. 2018;38(1):1–211。1.2 D 的 TIA 字樣與 1.5.2 判定取自洪志憲老師工具，與原文不同。</p>
+    </div>
+  </footer>
+</main>
+
+<div class="dock">
+  <div class="dock-in">
+    <div class="panel" id="panel" hidden><div class="res" id="result"></div></div>
+    <button type="button" class="bar" id="bar" aria-expanded="false" aria-controls="panel">
+      <span class="cell"><span>1.1 A–D</span><b id="b11"></b></span>
+      <span class="cell"><span>1.2 A–C</span><b id="b12"></b></span>
+      <span class="status" id="status" aria-live="polite"></span>
+      <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 10l5-5 5 5"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const CHECK = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8"/></svg>';
+const state = { on: {}, pick: {}, sample: false };
+let page = null;
+let sampleIdx = 0;
+
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+function rowHtml(it) {
+  const code = it.code ? `<span class="code">${it.code}</span>` : '';
+  const en = it.en ? `<span class="en" lang="en">${it.en}</span>` : '';
+  const lv = it.lvText ? `<span class="lv ${it.lv}">${it.lvText}</span>` : '';
+  return `<span class="box">${CHECK}<i></i></span><span>${code}${it.zh}${en}</span>${lv}`;
+}
+function renderList(hostId, items, group) {
+  const host = $(hostId);
+  items.forEach(it => {
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = group ? 'chk radio' : 'chk';
+    b.innerHTML = rowHtml(it);
+    if (group) {
+      b.dataset.group = group; b.dataset.val = it.id;
+      b.addEventListener('click', () => { state.pick[group] = state.pick[group] === it.id ? null : it.id; touched(); });
+    } else {
+      b.dataset.id = it.id;
+      b.addEventListener('click', () => { state.on[it.id] = !state.on[it.id]; touched(); });
+    }
+    li.appendChild(b);
+    host.appendChild(li);
+  });
+}
+/* 整句英文：預設收合 */
+function renderFull(hostId, items) {
+  const d = document.createElement('details');
+  d.className = 'full';
+  d.innerHTML = '<summary>看英文原文</summary><ul lang="en">' +
+    items.filter(i => i.full).map(i => `<li>${i.code ? `<b>${i.code}</b>` : ''}${i.full}</li>`).join('') + '</ul>';
+  $(hostId).appendChild(d);
+}
+function setCrit(id, ok, text) {
+  const el = $(id);
+  el.textContent = text;
+  el.classList.toggle('ok', !!ok);
+}
+function setResult(html) {
+  $('result').innerHTML = html;
+  $('printResult').innerHTML = html;
+}
+function today() {
+  const d = new Date();
+  const p = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+function sync() {
+  document.querySelectorAll('[data-id]').forEach(b => b.setAttribute('aria-pressed', !!state.on[b.dataset.id]));
+  document.querySelectorAll('[data-group]').forEach(b => b.setAttribute('aria-pressed', state.pick[b.dataset.group] === b.dataset.val));
+  $('sampleFlag').hidden = !state.sample;
+  page.render();
+}
+function touched() { state.sample = false; sync(); }
+function clearAnswers() {
+  state.on = {}; state.pick = {}; state.sample = false;
+  if (page.clearExtra) page.clearExtra();
+}
+
+/* 重設要按兩次，避免單手誤觸 */
+let armTimer = null;
+function disarm() {
+  clearTimeout(armTimer);
+  $('btnReset').classList.remove('arm');
+  $('btnReset').textContent = '重設';
+}
+function hasData() {
+  return Object.values(state.on).some(Boolean) || Object.values(state.pick).some(Boolean) ||
+    (page.hasExtra && page.hasExtra()) || $('mrn').value || $('memo').value;
+}
+function csvCell(v) {
+  let t = v === null || v === undefined ? '' : String(v);
+  if (typeof v === 'string' && /^[=+\-@\t\r]/.test(t)) t = "'" + t;
+  return /[",\n\r]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t;
+}
+function buildCsv() {
+  const rows = [
+    ['項目', '英文', '值'],
+    ['量表', page.name, ''],
+    ['範例資料', '', state.sample ? '是' : '否'],
+    ['病歷號', '', $('mrn').value],
+    ['日期', '', $('date').value],
+    ['備註', '', $('memo').value]
+  ].concat(page.csv());
+  return '﻿' + rows.map(r => r.map(csvCell).join(',')).join('\r\n');
+}
+function initCommon(p) {
+  page = p;
+  $('btnSample').addEventListener('click', () => {
+    clearAnswers();
+    const s = p.samples[sampleIdx];
+    s.set();
+    state.sample = true;
+    $('sampleFlag').textContent = `範例 ${sampleIdx + 1}／${p.samples.length}：${s.label}。範例資料，不是真實病人。`;
+    sampleIdx = (sampleIdx + 1) % p.samples.length;
+    disarm();
+    sync();
+  });
+  $('btnReset').addEventListener('click', () => {
+    const r = $('btnReset');
+    if (hasData() && !r.classList.contains('arm')) {
+      r.classList.add('arm');
+      r.textContent = '再按清空';
+      armTimer = setTimeout(disarm, 3000);
+      return;
+    }
+    disarm();
+    clearAnswers();
+    sampleIdx = 0;
+    $('mrn').value = ''; $('memo').value = ''; $('date').value = today();
+    sync();
+  });
+  $('btnPrint').addEventListener('click', () => window.print());
+  $('btnCsv').addEventListener('click', () => {
+    const url = URL.createObjectURL(new Blob([buildCsv()], { type: 'text/csv;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${p.name}_${$('date').value || today()}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+  $('bar').addEventListener('click', () => {
+    const open = $('bar').getAttribute('aria-expanded') === 'true';
+    $('bar').setAttribute('aria-expanded', !open);
+    $('panel').hidden = open;
+  });
+  $('date').value = today();
+  sync();
+}
+
+const I = {
+  l11a: [{ id: '11_a', code: 'A', zh: '至少 5 次符合 B–D 的發作', full: 'At least five attacks fulfilling criteria B–D' }],
+  l11b: [{ id: '11_b', code: 'B', zh: '單次 4–72 小時（未治療或治療無效時）', full: 'Headache attacks lasting 4–72 hours (when untreated or unsuccessfully treated)' }],
+  l11c: [
+    { id: '11_c1', code: 'C1', zh: '單側', en: 'Unilateral', full: 'Unilateral location' },
+    { id: '11_c2', code: 'C2', zh: '搏動性', en: 'Pulsating', full: 'Pulsating quality' },
+    { id: '11_c3', code: 'C3', zh: '中度或重度', en: 'Moderate or severe', full: 'Moderate or severe pain intensity' },
+    { id: '11_c4', code: 'C4', zh: '日常活動（走路、爬樓梯）加劇，或因此避免活動', full: 'Aggravation by or causing avoidance of routine physical activity (e.g. walking or climbing stairs)' }
+  ],
+  l11d: [
+    { id: '11_d1', code: 'D1', zh: '噁心及／或嘔吐', en: 'Nausea and/or vomiting', full: 'Nausea and/or vomiting' },
+    { id: '11_d2_photo', code: 'D2', zh: '畏光', en: 'Photophobia', full: 'Photophobia and phonophobia' },
+    { id: '11_d2_phono', code: 'D2', zh: '怕吵', en: 'Phonophobia' }
+  ],
+  l11e: [{ id: '11_e', code: 'E', zh: '無法以其他 ICHD-3 診斷更好解釋（已排除次發性頭痛）', full: 'Not better accounted for by another ICHD-3 diagnosis' }],
+  l12a: [{ id: '12_a', code: 'A', zh: '至少 2 次符合 B、C 的發作', full: 'At least two attacks fulfilling criteria B and C' }],
+  l12b: [
+    { id: '12_b1', code: 'B1', zh: '視覺：閃光、鋸齒線，或暗點、視野缺損', en: 'Visual', full: 'Fully reversible visual symptoms (flickering lights, spots or lines, and/or loss of vision)' },
+    { id: '12_b2', code: 'B2', zh: '感覺：針刺感、麻木', en: 'Sensory', full: 'Fully reversible sensory symptoms (pins and needles and/or numbness)' },
+    { id: '12_b3', code: 'B3', zh: '言語及／或語言：如失語', en: 'Speech and/or language', full: 'Fully reversible speech and/or language symptoms' },
+    { id: '12_b4', code: 'B4', zh: '運動：單側肢體無力，歸 1.2.3', en: 'Motor', full: 'Fully reversible motor symptoms' },
+    { id: '12_b5', code: 'B5', zh: '腦幹：構音異常、眩暈、耳鳴、聽力減退、複視、共濟失調、意識下降，歸 1.2.2', en: 'Brainstem', full: 'Fully reversible brainstem symptoms' },
+    { id: '12_b6', code: 'B6', zh: '視網膜：單眼閃光、暗點或失明，歸 1.2.4', en: 'Retinal', full: 'Fully reversible retinal symptoms' }
+  ],
+  l12c: [
+    { id: '12_c1', code: 'C1', zh: '至少 1 個症狀漸進擴展 ≥5 分鐘', full: 'At least one aura symptom spreads gradually over ≥5 minutes' },
+    { id: '12_c2', code: 'C2', zh: '2 個以上症狀相繼發生', full: 'Two or more aura symptoms occur in succession' },
+    { id: '12_c3', code: 'C3', zh: '每個症狀持續 5–60 分鐘', full: 'Each individual aura symptom lasts 5–60 minutes' },
+    { id: '12_c4', code: 'C4', zh: '至少 1 個症狀為單側（失語算單側）', full: 'At least one aura symptom is unilateral' },
+    { id: '12_c5', code: 'C5', zh: '至少 1 個症狀為正向（閃光、針刺感）', full: 'At least one aura symptom is positive' },
+    { id: '12_c6', code: 'C6', zh: '預兆同時或 60 分鐘內伴隨頭痛', full: 'The aura is accompanied, or followed within 60 minutes, by headache' }
+  ],
+  l12d: [{ id: '12_d', code: 'D', zh: '無法以其他 ICHD-3 診斷更好解釋，已排除 TIA', full: 'Not better accounted for by another ICHD-3 diagnosis' }]
+};
+Object.keys(I).forEach(k => renderList(k, I[k]));
+renderFull('f11', [...I.l11a, ...I.l11b, ...I.l11c, ...I.l11d, ...I.l11e]);
+renderFull('f12', [...I.l12a, ...I.l12b, ...I.l12c, ...I.l12d]);
+
+const NAME = {
+  '1.1': '無預兆偏頭痛', '1.5.1': '可能無預兆偏頭痛', '1.5.2': '可能有預兆偏頭痛',
+  '1.2.1.1': '典型預兆伴頭痛', '1.2.1.2': '典型預兆不伴頭痛',
+  '1.2.2': '腦幹預兆偏頭痛', '1.2.3': '偏癱型偏頭痛', '1.2.4': '視網膜偏頭痛'
+};
+const on = id => !!state.on[id];
+const count = key => I[key].filter(x => on(x.id)).length;
+
+function evaluate() {
+  const a1 = on('11_a'), b1 = on('11_b'), cN1 = count('l11c'), c1 = cN1 >= 2;
+  const d1 = on('11_d1') || (on('11_d2_photo') && on('11_d2_phono')), e1 = on('11_e');
+  const n1 = [a1, b1, c1, d1].filter(Boolean).length;
+  const dx1 = !e1 ? null : n1 === 4 ? '1.1' : n1 === 3 ? '1.5.1' : null;
+
+  const a2 = on('12_a'), bN2 = count('l12b'), b2 = bN2 >= 1, cN2 = count('l12c'), c2 = cN2 >= 3, d2 = on('12_d');
+  const n2 = [a2, b2, c2].filter(Boolean).length;
+  let sub = null;
+  if (on('12_b4')) sub = '1.2.3';
+  else if (on('12_b5')) sub = '1.2.2';
+  else if (on('12_b6') && !on('12_b1')) sub = '1.2.4';
+  else if (on('12_c6')) sub = '1.2.1.1';
+  else sub = '1.2.1.2';
+  let dx2 = null;
+  if (d2 && n2 === 3) dx2 = sub;
+  else if (d2 && b2 && ((a2 && cN2 === 2) || (!a2 && c2))) dx2 = '1.5.2';
+
+  return { a1, b1, cN1, c1, d1, e1, n1, dx1, a2, bN2, b2, cN2, c2, d2, n2, dx2, sub };
+}
+function dxList(r) {
+  const def = [];
+  if (r.dx2 && r.dx2 !== '1.5.2') def.push(r.dx2);
+  if (r.dx1 === '1.1') def.push('1.1');
+  if (def.length) return { def: true, codes: def };
+  const prob = [];
+  if (r.dx2 === '1.5.2') prob.push('1.5.2');
+  if (r.dx1 === '1.5.1') prob.push('1.5.1');
+  return { def: false, codes: prob };
+}
+const SUBNOTE = {
+  '1.2.2': '1.2.2 要求至少 2 個腦幹症狀，且沒有運動或視網膜症狀。',
+  '1.2.3': '1.2.3 要求運動無力加上視覺、感覺及／或言語語言症狀。',
+  '1.2.4': '1.2.4 要求單眼症狀經視野檢查或繪圖確認，加上至少 2/3（漸進擴展、5–60 分、60 分內伴頭痛）。'
+};
+function facts(r, list) {
+  const f = [];
+  if (r.dx2 && r.dx2 !== '1.5.2' && SUBNOTE[r.dx2]) f.push(SUBNOTE[r.dx2]);
+  if (r.dx2 && r.dx2 !== '1.5.2' && on('12_b6') && on('12_b1') && !on('12_b4') && !on('12_b5')) f.push('B6 與 B1 都勾時老師工具歸 1.2.1，但 1.2.1 要求沒有視網膜症狀，要核對是單眼或雙眼。');
+  if (list.def && list.codes.length === 2) f.push('同時有 1.1 與 1.2 應並列編碼。');
+  if (r.d2 && r.a2 && r.b2 && r.cN2 < 2) f.push('ICHD-3 1.5.2 是 A–C 缺一即符合，C 未達 3 項都算；老師工具要求 C 恰 2 項，此處依老師判未符合。');
+  if (!r.e1 && r.n1 >= 3) f.push('1.1 的 E 未勾：不判 1.1 或 1.5.1。');
+  if (!r.d2 && r.n2 >= 2) f.push('1.2 的 D 未勾：不判 1.2 或 1.5.2。');
+  return f;
+}
+const mark = b => b ? '符合' : '未符合';
+initCommon({
+  name: '偏頭痛ICHD3',
+  samples: [
+    { label: '1.1 無預兆偏頭痛', set() { ['11_a', '11_b', '11_c1', '11_c2', '11_c3', '11_c4', '11_d1', '11_d2_photo', '11_d2_phono', '11_e', '12_d'].forEach(k => state.on[k] = true); } },
+    { label: '1.2.1.1 典型視覺預兆', set() { ['12_a', '12_b1', '12_c1', '12_c3', '12_c4', '12_c5', '12_c6', '12_d', '11_e'].forEach(k => state.on[k] = true); } },
+    { label: '1.1 與 1.2 並存', set() { ['11_a', '11_b', '11_c1', '11_c2', '11_c3', '11_c4', '11_d1', '11_d2_photo', '11_d2_phono', '11_e', '12_a', '12_b1', '12_b2', '12_c1', '12_c2', '12_c3', '12_c4', '12_c5', '12_c6', '12_d'].forEach(k => state.on[k] = true); } }
+  ],
+  render() {
+    const r = evaluate();
+    $('s11').innerHTML = `${r.n1}<small>／4</small>`;
+    $('s12').innerHTML = `${r.n2}<small>／3</small>`;
+    $('b11').innerHTML = `${r.n1}<small>／4</small>`;
+    $('b12').innerHTML = `${r.n2}<small>／3</small>`;
+    setCrit('st11a', r.a1, mark(r.a1));
+    setCrit('st11b', r.b1, mark(r.b1));
+    setCrit('st11c', r.c1, `${r.cN1}/4 ${mark(r.c1)}`);
+    setCrit('st11d', r.d1, mark(r.d1));
+    setCrit('st11e', r.e1, mark(r.e1));
+    setCrit('st12a', r.a2, mark(r.a2));
+    setCrit('st12b', r.b2, `${r.bN2}/6 ${mark(r.b2)}`);
+    setCrit('st12c', r.c2, `${r.cN2}/6 ${mark(r.c2)}`);
+    setCrit('st12d', r.d2, mark(r.d2));
+    const list = dxList(r);
+    const label = list.codes.join('＋');
+    $('status').innerHTML = list.codes.length
+      ? `<span class="badge ${list.def ? 'def' : 'prob'}">${label}</span>`
+      : '<span class="badge none">未符合</span>';
+    const big = list.codes.length
+      ? list.codes.map(c => `<p class="big">${c} ${NAME[c]}</p>`).join('')
+      : '<p class="big">未符合 1.1、1.2 或 1.5</p>';
+    const fs = facts(r, list).map(t => `<p class="fact">${t}</p>`).join('');
+    setResult(
+      `<h3>判定</h3>${big}${fs}` +
+      `<h3>1.1 準則</h3><p class="sub">A ${mark(r.a1)}、B ${mark(r.b1)}、C ${r.cN1}/4、D ${mark(r.d1)}、E ${mark(r.e1)}</p>` +
+      `<h3>1.2 準則</h3><p class="sub">A ${mark(r.a2)}、B ${r.bN2}/6、C ${r.cN2}/6、D ${mark(r.d2)}</p>`
+    );
+  },
+  csv() {
+    const r = evaluate();
+    const rows = [
+      ['判定', 'Diagnosis', dxList(r).codes.join('; ') || '未符合'],
+      ['1.1 A–D 符合數', '1.1 criteria met', r.n1],
+      ['1.2 A–C 符合數', '1.2 criteria met', r.n2]
+    ];
+    Object.keys(I).forEach(k => I[k].forEach(x => rows.push([`${k.slice(1, 3) === '11' ? '1.1' : '1.2'} ${x.code} ${x.zh}`, x.en || x.full || '', on(x.id) ? 1 : 0])));
+    return rows;
+  }
+});
+
+</script>
+</body>
+</html>
